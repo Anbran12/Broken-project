@@ -53,6 +53,14 @@ class personas:
                 if self.matriz[i][j].get_nombre() == producto:
                     print(f"La ubicación del producto es:\n Fila: {i} \n Columna: {j}\n\n")
 
+    def Contarproductos(self):
+        totalproductos = 0
+        for i in range (len(self.matriz)):
+            for j in range (len(self.matriz)):
+                totalproductos += self.matriz[i][j].get_cantidad()
+        print(f"El total de productos en el almacen es: {totalproductos}\n\n")
+
+
 
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 # PUNTOS
@@ -69,6 +77,13 @@ class punto1:
         obj.Mostrarmatriz()
         obj.Buscarproducto()
 
+class punto2:
+    def punto2(self):
+        obj = personas()
+        obj.llenarmatriz()
+        obj.Mostrarmatriz()
+        obj.Contarproductos()
+
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 # MENU PRINCIPAL
 
@@ -76,7 +91,14 @@ class punto1:
 #main = main()
 #print(main.main())
 
-#PUNTO 1
+opcion = int(input("Ingrese el punto a ejecutar: "))
 
-punto1 = punto1()
-print(punto1.punto1())
+if opcion == 1:
+    #PUNTO 1
+    punto1 = punto1()
+    print(punto1.punto1())
+
+if opcion == 2:
+    #PUNTO 2
+    punto2 = punto2()
+    print(punto2.punto2())
