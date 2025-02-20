@@ -1,4 +1,4 @@
-import metodos as m
+import Metodos as m
 class Punto3:
     def Epunto3(self):
         obj = m.MetodosLibreria()
