@@ -1,7 +1,7 @@
 import metodos as m
-class Punto1:
-    def Epunto1(self):
+class Punto2:
+    def Epunto2(self):
         obj = m.ProductosAlmacen()
         obj.llenarmatriz()
         obj.MostrarMatrizAlmacen()
-        obj.Buscarproducto()
+        obj.ContarProductosAlmacen()
