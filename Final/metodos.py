@@ -1,5 +1,6 @@
-import Objproductos as ObjP
+import ObjProductos as ObjP
 import ObjLibreria as ObjL
+import ObjTeatro as ObjT
 
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 # METODOS DE MATRICES
@@ -42,12 +43,12 @@ class ProductosAlmacen:
 
 class MetodosLibreria:
     def LlenarMatriz(self):
-        ObjLibreria = MetodosMatrices()
-        ObjLibreria.Crearmatriz()
-        for i in range(ObjLibreria.dimensiones):
-            for j in range(ObjLibreria.dimensiones):
-                ObjLibreria.matriz[i][j] = ObjL.Libreria(input("Ingrese el titulo del libro: "), input("Ingrese el autor del libro: "), int(input("Ingrese el precio del libro: ")))
-        self.matriz = ObjLibreria.matriz
+        ObjLibro = MetodosMatrices()
+        ObjLibro.Crearmatriz()
+        for i in range(ObjLibro.dimensiones):
+            for j in range(ObjLibro.dimensiones):
+                ObjLibro.matriz[i][j] = ObjL.Libreria(input("Ingrese el titulo del libro: "), input("Ingrese el autor del libro: "), int(input("Ingrese el precio del libro: ")))
+        self.matriz = ObjLibro.matriz
 
     def MostrarMatrizLibreria(self):
         for i in range(len(self.matriz)):
@@ -61,3 +62,27 @@ class MetodosLibreria:
                 if self.matriz[i][j].get_precio() > Vlibro:
                     Vlibro = self.matriz[i][j].get_precio()
         print(f"El libro más caro tiene un valor de: {Vlibro}\n\n")
+
+class PersonasTeatro:
+
+    def LlenarMatrizPT(self):
+        ObjTeatro1 = MetodosMatrices()
+        ObjTeatro1.Crearmatriz()
+        for i in range(ObjTeatro1.dimensiones):
+            for j in range(ObjTeatro1.dimensiones):
+                ObjTeatro1.matriz[i][j] = ObjT.Asiento(int(input("\nIngresa el número de asiento: ")), int(input("Ingresa el número de fila: ")), int(input("Ingresa el precio: ")))
+        self.matriz = ObjTeatro1.matriz
+
+    def MostrarMatrizPT(self):
+        for i in range(len(self.matriz)):
+            for j in range(len(self.matriz)):
+                print(f"\nEl número de asiento es: {self.matriz[i][j].get_numero()}\nEl número de fila es: {self.matriz[i][j].get_fila()}\nEl precio es: {self.matriz[i][j].get_precio()}")
+
+    def OrdenarPorPrecio(self):
+        Ordenada = [sorted(fila, key=lambda p: p.get_precio()) for fila in self.matriz]
+        for fila in Ordenada:
+                print(fila)
+
+        for i in range(len(self.matriz)):
+            for j in range(len(self.matriz)):
+                print(f"\nEl número de asiento es: {Ordenada[i][j].get_numero()}\nEl número de fila es: {Ordenada[i][j].get_fila()}\nEl precio es: {Ordenada[i][j].get_precio()}")
