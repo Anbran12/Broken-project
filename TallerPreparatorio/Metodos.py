@@ -12,6 +12,9 @@ class Metodos:
         self.Dim = Dim
         matriz = [[None for filas in range(Dim)]for columna in range(Dim)]
         self.matriz = matriz
+        Mdisponible = [[None for filas in range(Dim)]for columna in range(Dim)]
+        self.mdisponible = Mdisponible
+
 
     def mostrarmatrizff(self):
         for i in range(len(self.matriz)):
@@ -19,8 +22,6 @@ class Metodos:
 
 
     def ingresarproductos(self):
-        M = Metodos()
-        M.crearmatriz()
         for i in range(len(self.matriz)):
             for j in range(len(self.matriz)):
                 N,P,C = "",0,0
@@ -69,9 +70,6 @@ class Metodos:
 
 
     def llenarmatrizpd(self):
-        M = Metodos()
-        M.crearmatriz()
-        self.mdisponible = self.matriz
         for i in range(len(self.matriz)):
             for j in range(len(self.matriz)):
                 N,P,D = "",0,None
@@ -87,7 +85,14 @@ class Metodos:
                         print("\nEl valor ingresado no es valido.")
                 while D == None:
                     try:
-                        D= bool(input("\n- Ingresa la disponibilidad (False/True): "))
+                        D = input("\n- Ingresa la disponibilidad (0/1): ")
+                        if D == "0":
+                            D = False
+                        elif D == "1":
+                            D = True
+                        else:
+                            D = None
+                            print("\nEl valor ingresado no es valido.")
                     except ValueError:
                         print("\nEl valor ingresado no es valido.")              
                 self.matriz[i][j] = Obj2.Almacen2(N,P,D)
@@ -95,10 +100,11 @@ class Metodos:
     def productosdisponibles(self):
         for i in range(len(self.matriz)):
             for j in range(len(self.matriz)):
-                if self.matriz[i][j].get_disponible == True: 
+                if self.matriz[i][j].get_disponible() == True: 
                     self.mdisponible[i][j] = self.matriz[i][j]
 
     def mostrarmatrizpd(self):
+        print("\nProductos disponibles:\n")
         for i in range(len(self.mdisponible)):
             for j in range(len(self.mdisponible)):
                 if self.mdisponible[i][j] != None:
