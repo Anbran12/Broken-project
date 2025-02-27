@@ -1,5 +1,6 @@
 import ObjProductos as Obj1
 import ObjProductos2 as Obj2
+import ObjAsiento as Obj3
 
 class Metodos:
     def crearmatriz(self):
@@ -109,3 +110,45 @@ class Metodos:
             for j in range(len(self.mdisponible)):
                 if self.mdisponible[i][j] != None:
                     print(f"\nProducto: {self.mdisponible[i][j].get_nombre()}\nPrecio: {self.mdisponible[i][j].get_precio()}\nDisponibilidad: {self.mdisponible[i][j].get_disponible()}")
+                    
+    def llenarmatrizteatro(self):
+        for i in range(len(self.matriz)):
+            for j in range (len(self.matriz)):
+                N,F,P = 0,0,0
+                while N == 0:
+                    try:
+                        N = int(input("Ingresa el número del asiento: "))
+                    except ValueError:
+                        print("El valor ingresado no es valido.")
+                        
+                while F == 0:
+                    try:
+                        F = int(input("Ingresa la fila del asiento: "))
+                    except ValueError:
+                        print("El valor ingresado no es valido.")
+                        
+                while P == 0:
+                    try:
+                        P = int(input("Ingresa el precio del asiento: "))
+                    except ValueError:
+                        print("El valor ingresado no es valido.")
+                self.matriz[i][j] = Obj3.Asiento(N,F,P)
+                
+    def mostrarmatrizteatro(self):
+        print("\nAsientos disponibles: ")
+        for i in range(len(self.matriz)):
+            for j in range (len(self.matriz)):
+                print(f"Número: {self.matriz[i][j].get_numero()}\nFila: {self.matriz[i][j].get_fila()}\nPrecio: {self.matriz[i][j].get_precio()}")
+                
+    def ordenarfilasteatro(self):
+        for i in range(len(self.matriz)):
+            for j in range (len(self.matriz)):
+                V1 = self.matriz[i][j].get_precio()
+                for k in range(len(self.matriz)):
+                    for l in range (len(self.matriz)):
+                        V2 = self.matriz[k][l].get_precio()
+                        Temp1 = self.matriz[i][j]
+                        Temp2 = self.matriz[k][l]
+                        if V1 > V2:
+                            self.matriz[i][j] = Temp2
+                            self.matriz[j][k] = Temp1
