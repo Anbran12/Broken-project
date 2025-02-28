@@ -1,24 +1,25 @@
 class Asiento:
     def __init__(self,numero,fila,precio):
-        self.__numero = numero
-        self.__fila = fila
-        self.__precio = precio
-        
-    def set_numero(self,numero):
-        self.__numero = numero
-        
-    def set_fila(self,fila):
-        self.__fila = fila
-    
-    def set_precio(self,precio):
-        self.__precio = precio
-    
-    def get_numero(self):
-        return self.__numero
-    
-    def get_fila(self):
-        return self.__fila
-    
-    def get_precio(self):
-        return self.__precio
+        self._numero = numero
+        self._fila = fila
+        self._precio = precio
+
+    @property
+    def numero(self):
+        return self._numero
+    @property
+    def fila(self):
+        return self._fila
+    @property
+    def precio(self):
+        return self._precio
+    @numero.setter
+    def numero(self,numero):
+        self._numero = numero
+    @fila.setter
+    def fila(self,fila):
+        self._fila = fila
+    @precio.setter
+    def precio(self,precio):
+        self._precio = precio
     

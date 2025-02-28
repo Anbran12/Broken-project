@@ -1,23 +1,24 @@
 class Almacen:
     def __init__(self, nombre,precio,cantidad):
-        self.__nombre = nombre
-        self.__precio = precio
-        self.__cantidad = cantidad
+        self._nombre = nombre
+        self._precio = precio
+        self._cantidad = cantidad
 
-    def set_nombre(self, nombre):
-        self.__nombre = nombre
-
-    def set_precio(self, precio):
-        self.__precio = precio
-
-    def set_cantidad(self, cantidad):
-        self.__cantidad = cantidad
-
-    def get_nombre(self):
-        return self.__nombre
-
-    def get_precio(self):
-        return self.__precio
-
-    def get_cantidad(self):
-        return self.__cantidad
+    @property
+    def nombre(self):
+        return self._nombre
+    @property
+    def precio(self):
+        return self._precio
+    @property
+    def cantidad(self):
+        return self._cantidad
+    @nombre.setter
+    def nombre(self, nombre):
+        self._nombre = nombre
+    @precio.setter
+    def precio(self, precio):
+        self._precio = precio
+    @cantidad.setter
+    def cantidad(self, cantidad):
+        self._cantidad = cantidad

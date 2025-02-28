@@ -1,6 +1,7 @@
 import ObjProductos as Obj1
 import ObjProductos2 as Obj2
 import ObjAsiento as Obj3
+import ObjEstudiantes as Obj4
 
 class Metodos:
     def crearmatriz(self):
@@ -47,7 +48,7 @@ class Metodos:
     def mostrarproductos(self):
         for i in range(len(self.matriz)):
             for j in range(len(self.matriz)):
-                print(f"\nProducto: {self.matriz[i][j].get_nombre()}\nPrecio: {self.matriz[i][j].get_precio()}\nCantidad: {self.matriz[i][j].get_cantidad()}")
+                print(f"\nProducto: {self.matriz[i][j].nombre}\nPrecio: {self.matriz[i][j].precio}\nCantidad: {self.matriz[i][j].cantidad}")
 
         
     def buscarproducto(self):
@@ -59,14 +60,14 @@ class Metodos:
                 print("\nEl valor ingresado no es valido.")
         for i in range(len(self.matriz)):
             for j in range(len(self.matriz)):
-                if self.matriz[i][j].get_nombre() == buscar:
+                if self.matriz[i][j].nombre == buscar:
                     print(f"\nEl producto {buscar}, se encuentra en la siguiente posición: \nFila: {i}\nColumna: {j}")
         
     def totalproductos(self):
         suma = 0
         for i in range(len(self.matriz)):
             for j in range(len(self.matriz)):
-                suma += self.matriz[i][j].get_cantidad()
+                suma += self.matriz[i][j].cantidad
         print(f"\nEl total de productos en la tienda es: {suma}")
 
 
@@ -101,7 +102,7 @@ class Metodos:
     def productosdisponibles(self):
         for i in range(len(self.matriz)):
             for j in range(len(self.matriz)):
-                if self.matriz[i][j].get_disponible() == True: 
+                if self.matriz[i][j].disponible == True: 
                     self.mdisponible[i][j] = self.matriz[i][j]
 
     def mostrarmatrizpd(self):
@@ -109,7 +110,7 @@ class Metodos:
         for i in range(len(self.mdisponible)):
             for j in range(len(self.mdisponible)):
                 if self.mdisponible[i][j] != None:
-                    print(f"\nProducto: {self.mdisponible[i][j].get_nombre()}\nPrecio: {self.mdisponible[i][j].get_precio()}\nDisponibilidad: {self.mdisponible[i][j].get_disponible()}")
+                    print(f"\nProducto: {self.mdisponible[i][j].nombre}\nPrecio: {self.mdisponible[i][j].precio}\nDisponibilidad: {self.mdisponible[i][j].disponible}")
                     
     def llenarmatrizteatro(self):
         for i in range(len(self.matriz)):
@@ -138,17 +139,46 @@ class Metodos:
         print("\nAsientos disponibles: ")
         for i in range(len(self.matriz)):
             for j in range (len(self.matriz)):
-                print(f"Número: {self.matriz[i][j].get_numero()}\nFila: {self.matriz[i][j].get_fila()}\nPrecio: {self.matriz[i][j].get_precio()}")
+                print(f"Número: {self.matriz[i][j].numero}\nFila: {self.matriz[i][j].fila}\nPrecio: {self.matriz[i][j].precio}")
                 
     def ordenarfilasteatro(self):
         for i in range(len(self.matriz)):
             for j in range (len(self.matriz)):
-                V1 = self.matriz[i][j].get_precio()
+                V1 = self.matriz[i][j].precio
                 for k in range(len(self.matriz)):
                     for l in range (len(self.matriz)):
-                        V2 = self.matriz[k][l].get_precio()
+                        V2 = self.matriz[k][l].precio
                         Temp1 = self.matriz[i][j]
                         Temp2 = self.matriz[k][l]
                         if V1 > V2:
                             self.matriz[i][j] = Temp2
                             self.matriz[j][k] = Temp1
+
+    def llenarmatrizestudiantes(self):
+        for i in range(len(self.matriz)):
+            for j in range(len(self.matriz)):
+                N,C1,C2,C3 = "",0.0,0.0,0.0
+                while N == "":
+                    try:
+                        N = input("\nIngresa el nombre del estudiante: ")
+                    except ValueError:
+                        print("\nEl valor ingresado no es valido.")
+                    try:
+                        C1 = input("\nIngresa el la calificacion 1: ")
+                    except ValueError:
+                        print("\nEl valor ingresado no es valido.")
+                    try:
+                        C2 = input("\nIngresa el la calificacion 2: ")
+                    except ValueError:
+                        print("\nEl valor ingresado no es valido.")
+                    try:
+                        C3 = input("\nIngresa el la calificacion 3: ")
+                    except ValueError:
+                        print("\nEl valor ingresado no es valido.")
+                self.matriz[i][j] = Obj4.Estudiantes(N,C1,C2,C3)
+    
+    def mostrarmatrizestudiantes(self):
+        print("\nEstudiantes registrados: ")
+        for i in range(len(self.matriz)):
+            for j in range(len(self.matriz)):
+                print(f"Nombre: {self.matriz[i][j].nombre}\nNota 1: {self.matriz[i][j].nota1}\nNota 2:{self.matriz[i][j].nota2}\nNota 3:{self.matriz[i][j].nota3}")
