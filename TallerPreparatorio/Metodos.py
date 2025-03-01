@@ -157,28 +157,52 @@ class Metodos:
     def llenarmatrizestudiantes(self):
         for i in range(len(self.matriz)):
             for j in range(len(self.matriz)):
-                N,C1,C2,C3 = "",0.0,0.0,0.0
+                N,C = "",0.0
                 while N == "":
                     try:
                         N = input("\nIngresa el nombre del estudiante: ")
                     except ValueError:
                         print("\nEl valor ingresado no es valido.")
                     try:
-                        C1 = input("\nIngresa el la calificacion 1: ")
+                        C = input("\nIngresa el la calificacion 1: ")
                     except ValueError:
                         print("\nEl valor ingresado no es valido.")
-                    try:
-                        C2 = input("\nIngresa el la calificacion 2: ")
-                    except ValueError:
-                        print("\nEl valor ingresado no es valido.")
-                    try:
-                        C3 = input("\nIngresa el la calificacion 3: ")
-                    except ValueError:
-                        print("\nEl valor ingresado no es valido.")
-                self.matriz[i][j] = Obj4.Estudiantes(N,C1,C2,C3)
+                self.matriz[i][j] = Obj4.Estudiantes(N,C)
     
     def mostrarmatrizestudiantes(self):
         print("\nEstudiantes registrados: ")
         for i in range(len(self.matriz)):
             for j in range(len(self.matriz)):
-                print(f"Nombre: {self.matriz[i][j].nombre}\nNota 1: {self.matriz[i][j].nota1}\nNota 2:{self.matriz[i][j].nota2}\nNota 3:{self.matriz[i][j].nota3}")
+                print(f"\nNombre: {self.matriz[i][j].nombre}\nCalificación: {self.matriz[i][j].calificacion}")
+
+    def distribucionestudiantes(self):
+        calificacionA = [[None for i in range(self.Dim)]for j in range(self.Dim)]
+        calificacionB = [[None for i in range(self.Dim)]for j in range(self.Dim)]
+        calificacionC = [[None for i in range(self.Dim)]for j in range(self.Dim)]
+        contador1,contador2,contador3 = 0,0,0
+        for i in range(len(self.matriz)):
+            for j in range(len(self.matriz)):
+                variable = self.matriz[i][j].calificacion
+                if variable.lower() == "a":
+                    calificacionA.append(self.matriz[i][j])
+                else:
+                    if variable.lower() == "b":
+                        calificacionB.append(self.matriz[i][j])
+                    else:
+                        if variable.lower() == "c":
+                            calificacionC.append(self.matriz[i][j])
+
+        print("\nEstudiantes calificación A: ")
+        for i in range(len(calificacionA)):
+            for j in range(len(calificacionA)):
+                print(f"\nNombre: {calificacionA[i][j].nombre}\nCalificación: {calificacionA[i][j].calificacion}")
+
+        print("\nEstudiantes calificación B: ")
+        for i in range(len(calificacionA)):
+            for j in range(len(calificacionA)):
+                print(f"\nNombre: {calificacionB[i][j].nombre}\nCalificación: {calificacionB[i][j].calificacion}")
+
+        print("\nEstudiantes calificación C: ")
+        for i in range(len(calificacionA)):
+            for j in range(len(calificacionA)):
+                print(f"\nNombre: {calificacionC[i][j].nombre}\nCalificación: {calificacionC[i][j].calificacion}")

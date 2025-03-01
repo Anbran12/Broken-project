@@ -5,3 +5,4 @@ class Punto6:
         Objpunto6.crearmatriz()
         Objpunto6.llenarmatrizestudiantes()
         Objpunto6.mostrarmatrizestudiantes()
+        Objpunto6.distribucionestudiantes()
