@@ -30,7 +30,7 @@ class Pila:
             Estado = True
             while Estado:
                 try:
-                    Decision = input("Desea ingresar otro registro (Si/No)")
+                    Decision = input("\nDesea ingresar otro registro (Si/No): ")
                     if Decision.lower() in ["si","no"]:
                         if Decision == "si":
                             Decision = 1
@@ -46,7 +46,11 @@ class Pila:
 
          
     def mostrarregistrosvehiculos(self):
-        pass
+        for i in self.P:
+            print(
+                "\n--------------------------------",
+                f"\nMarca: {i.marca}\nColor: {i.color}\nPrecio: {i.precio}"
+                )
 
 
     def eliminarregistrovehiculos(self):

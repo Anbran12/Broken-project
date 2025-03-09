@@ -9,7 +9,7 @@ import PuntoVehiculos as p1
 while True:
     try:
         print("\nMenú:",
-            "\n1. Suma total de la matriz.")
+            "\n1. Llenar datos vehiculos.")
         O = int(input("\nIngresa la opción que deseas ejecutar (1 - 10) o cero (0) para salir: "))
         if O in [1]:
             if O == 1:
