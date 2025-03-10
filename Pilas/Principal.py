@@ -70,3 +70,51 @@ class Pila:
                 estado = False
             except ValueError:
                 print("Valor no valido")
+                
+    def crearyllenarpilap3(self):
+        P = deque()
+        self.P = P
+        Temp = deque()
+        estado = True
+        while estado:
+            estado2 = True
+            while estado2:
+                try:
+                    numero = int(input("\nIngresa un número entre: "))
+                    if numero != 0:
+                        estado2 = False
+                except ValueError:
+                    print("Valor no valido.")
+            estado3 = True
+            while estado3:
+                self.P.append(numero)
+                try:
+                    E = input("\nDesea ingresar otro numero S/N: ")
+                    if E.lower() == "n":
+                        estado = False
+                        estado2 = False
+                        estado3 = False
+                    if E.lower() == "s":
+                        estado3 = False
+                except ValueError:
+                    print("Valor no valido.")
+        
+        while len(self.P):
+            Ntemp = self.P.pop()
+            if Ntemp < 0:
+                Ntemp = 0
+                Temp.append(Ntemp)
+            elif Ntemp > 7 and Ntemp < 21:
+                Ntemp = 50
+                Temp.append(Ntemp)
+            elif Ntemp > 59 and Ntemp < 63:
+                Ntemp = 100
+                Temp.append(Ntemp)            
+            else:
+                Temp.append(Ntemp)
+        while len(Temp):
+            self.P.append(Temp.pop())
+                
+    def mostrarpilap3(self):
+        for i in self.P:
+            print(i)
