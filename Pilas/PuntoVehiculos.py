@@ -5,3 +5,5 @@ class PuntoVehiculos:
         Objpila = P.Pila()
         Objpila.crearyllenarpilavehiculos()
         Objpila.mostrarregistrosvehiculos()
+        Objpila.eliminarregistrovehiculos()
+        Objpila.mostrarregistrosvehiculos()

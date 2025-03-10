@@ -1,4 +1,5 @@
 import PuntoVehiculos as p1
+#import Punto1 as p1
 #import Punto2 as p2
 #import Punto3 as p3
 #import Punto4 as p4
@@ -9,13 +10,13 @@ import PuntoVehiculos as p1
 while True:
     try:
         print("\nMenú:",
-            "\n1. Llenar datos vehiculos.")
+            "\n10. Llenar datos vehiculos.")
         O = int(input("\nIngresa la opción que deseas ejecutar (1 - 10) o cero (0) para salir: "))
-        if O in [1]:
+        if O in [10]:
             if O == 1:
                 Objp1 = p1.PuntoVehiculos()
                 Objp1.puntovehiculos()
-        elif O in [2,3,4,5,6,7,8,9,10]:
+        elif O in [1,2,3,4,5,6,7,8,9]:
             print("En mantenimiento")
         elif O == 0:
             print("Saliendo...")

@@ -55,13 +55,18 @@ class Pila:
 
     def eliminarregistrovehiculos(self):
         estado = True
+        temp = deque()
+        self.temp = temp
         while estado:
             try:
-                D = int(input("Ingresa un dato a eliminar: "))
-#                if D != 0:
-#                    self.P.append(D)
-#                else:
-#                    estado = False
-#                    print("Ha salido.")
+                D = input("\nIngresa un dato a eliminar: ")
+                while len(self.P):
+                    if D == self.P[-1].marca:
+                        self.P.pop()
+                    else:
+                        self.temp.append(self.P.pop())
+                while len(self.temp):
+                    self.P.append(self.temp.pop())
+                estado = False
             except ValueError:
                 print("Valor no valido")
