@@ -2,9 +2,10 @@ from collections import deque
 import ObjVehiculos as ObjV
 
 class Pila:
-    def crearyllenarpilavehiculos(self):
+    def crearpilavehiculos(self):
         P = deque()
         self.P = P
+    def llenarpilavehiculos(self):
         Decision = 1
         while Decision == 1:                
             M,C,P = "","",0.0
@@ -48,7 +49,7 @@ class Pila:
     def mostrarregistrosvehiculos(self):
         for i in self.P:
             print(
-                "\n--------------------------------",
+                "\n--------------------------------\n",
                 f"\nMarca: {i.marca}\nColor: {i.color}\nPrecio: {i.precio}"
                 )
 
@@ -70,7 +71,33 @@ class Pila:
                 estado = False
             except ValueError:
                 print("Valor no valido")
-                
+
+    def modificarobjeto(self):
+        estado4 = True
+        while estado4:
+            try:
+                opcion1 = input("\n¿Qué vehículo desea modificar: ")
+                for vehículos in self.P:
+                    if opcion1 == vehículos.marca:
+                        opcion2 = int(input("\n¿Qué dato desea modificar (1. Marca, 2. Color 3. Precio): "))
+                        if opcion2 == 1:
+                            print(f"\nLa marca actual es: {vehículos.marca}")
+                            vehículos.marca = input("Ingresa la nueva marca para el vehículo: ")
+                            estado4 = False
+                        elif opcion2 == 2:
+                            print(f"\nEl color actual es: {vehículos.color}")
+                            vehículos.color = input("Ingresa el nuevo color para el vehículo: ")
+                            estado4 = False
+                        elif opcion2 == 3:
+                            print(f"\nEl precio actual es: {vehículos.precio}")
+                            vehículos.precio = int(input("Ingresa el nuevo precio para el vehículo: "))
+                            estado4 = False
+                    else:
+                        print("\nEl vehículo no registra.")
+            except ValueError:
+                print("Valor no valido.\n")
+# ---------------------------------------------------------------------------------------
+
     def crearyllenarpilap3(self):
         P = deque()
         self.P = P
