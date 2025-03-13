@@ -8,11 +8,13 @@ class PuntoVehiculos:
         estado5 = True
         while estado5:
             try:
-                opcion = int(input("Que desea hacer: ",
-                           "1. Ingresar más registros.",
-                           "2. Mostrar todos los registros.",
-                           "3. Eliminar registro.",
-                           "4. Modificar registro."))
+                print("\nQue desea hacer: ",
+                           "\n1. Ingresar más registros.",
+                           "\n2. Mostrar todos los registros.",
+                           "\n3. Eliminar registro.",
+                           "\n4. Modificar registro.",
+                           "\n0. Salir.")
+                opcion = int(input())
                 if opcion == 1:
                     Objpila.llenarpilavehiculos()
                 elif opcion == 2:
@@ -21,5 +23,8 @@ class PuntoVehiculos:
                     Objpila.eliminarregistrovehiculos()
                 elif opcion == 4:
                     Objpila.modificarobjeto()
+                elif opcion == 0:
+                    print("Saliendo...")
+                    break
             except ValueError:
                 print("Opción no valida.")

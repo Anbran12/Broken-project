@@ -92,10 +92,10 @@ class Pila:
                             print(f"\nEl precio actual es: {vehículos.precio}")
                             vehículos.precio = int(input("Ingresa el nuevo precio para el vehículo: "))
                             estado4 = False
-                    else:
-                        print("\nEl vehículo no registra.")
+#                else:
+#                    print("\nEl vehículo no registra.")
             except ValueError:
-                print("Valor no valido.\n")
+                print("\nValor no valido o el vehículo no exite.")
 # ---------------------------------------------------------------------------------------
 
     def crearyllenarpilap3(self):
