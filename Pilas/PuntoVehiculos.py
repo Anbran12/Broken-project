@@ -3,7 +3,7 @@ import Principal as P
 class PuntoVehiculos:
     def puntovehiculos(self):
         Objpila = P.Pila()
-        Objpila.crearpilavehiculos()
+        Objpila.crearpilageneral()
         Objpila.llenarpilavehiculos()
         estado5 = True
         while estado5:
