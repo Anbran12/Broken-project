@@ -149,16 +149,16 @@ class Pila:
             
 class VHonda:
     def crearpila(self):
-        H = deque()
+        Hvehiculos = deque()
         Temp = deque()
-        self.H = H
+        self.Hvehiculos = Hvehiculos
         self.Temp = Temp
         
     def ingresarrepuestos(self):
         estado = True
         while estado:
             print("\nA continuación ingresa los datos del vehiculo: ")
-            M,R,C,P,Otro = "","",-1,0.0,"Pen"
+            M,R,C,P,Otro = "","",-1,0.0,""
             while M == "":
                 try:
                     M = input("Ingresa el nombre del repuesto: ")
@@ -179,37 +179,35 @@ class VHonda:
                     P = input("Ingresa el precio: ")
                 except ValueError:
                     print("Valor no valido.")
-            while Otro == "Pen":
+# POR REVISAR!!!!!!!!!!!!!!
+            while Otro != ["s","n"]:
                 try:
-                    Otro = input("Desea ingresar otro producto (S/N): ")
+                    Otro = input("\nDesea ingresar otro producto (S/N): ")
                 except ValueError:
                     print("Valor no valido.")
                 if "n" == Otro.lower():
+                    estado = False
                     break
-            self.H.append(ObjH.Honda(M,R,C,P)) 
+            self.Hvehiculos.append(ObjH.Honda(M,R,C,P))
         
     def buscarrepuesto(self):
         buscar = ""
         while buscar == "":
             try:
                 buscar = input("\nIngresa el repuesto a buscar: ")
+                self.buscar = buscar
             except ValueError:
                 print("Valor no valido.")
                 
-        for repuesto in self.H:
-            if repuesto == buscar:
+        for repuesto in self.Hvehiculos:
+            if repuesto.marca == self.buscar:
+                temprepuesto = repuesto
+                self.temprepuesto = temprepuesto
                 print(f"\nLa información del repuesto buscado es: \n- Marca: {repuesto.marca}\n- Referencia: {repuesto.referencia}\n- Cantidad: {repuesto.cantidad}\n- Precio: {repuesto.precio}")
+        if not self.temprepuesto:
+            print("\nRupuesto no encontrado.")
     
     def modificarinformacion(self):
-        Modificar = ""
-        while Modificar == "":
-            try:
-                Modificar = input("\nIngresa el repuesto a modificar: ")
-            except ValueError:
-                print("Valor no valido.")
-                
-        for repuesto in self.H:
-            if repuesto == Modificar:
                 print("\n¿Qué dato desea modificar?\n1. Marca\n2. Referencia\n3. Cantidad\n1. Precio")
                 opcion = 0
                 while opcion == 0:
@@ -222,7 +220,7 @@ class VHonda:
                     while cambio == "":
                         try:
                             cambio = int(input("\nIngresa el nuevo valor:"))
-                            repuesto.marca = cambio                    
+                            self.temprepuesto.marca = cambio                    
                         except ValueError:
                             print("Valor no valido.")
                 if opcion == 2:
@@ -230,7 +228,7 @@ class VHonda:
                     while opcion == "":
                         try:
                             cambio = int(input("\nIngresa el nuevo valor:"))
-                            repuesto.referencia = cambio                    
+                            self.temprepuesto.referencia = cambio                    
                         except ValueError:
                             print("Valor no valido.")
                 if opcion == 3:
@@ -238,7 +236,7 @@ class VHonda:
                     while opcion == -1:
                         try:
                             cambio = int(input("\nIngresa el nuevo valor:"))
-                            repuesto.cantidad = cambio                    
+                            self.temprepuesto.cantidad = cambio                    
                         except ValueError:
                             print("Valor no valido.")
                 if opcion == 4:
@@ -246,46 +244,35 @@ class VHonda:
                     while opcion == 0.0:
                         try:
                             cambio = int(input("\nIngresa el nuevo valor:"))
-                            repuesto.precio = cambio                    
+                            self.temprepuesto.precio = cambio                    
                         except ValueError:
                             print("Valor no valido.")
                             
     def ventarepuesto(self):
-        VModificar = ""
-        while VModificar == "":
-            try:
-                VModificar = input("\nIngresa el repuesto a vender: ")
-            except ValueError:
-                print("Valor no valido.")
-        for repuesto in self.H:
-            if repuesto == VModificar:
-                print(f"\nEl stock actual de repuesto {repuesto.marca} es {repuesto.cantidad}")
         Estado3 = True
         while Estado3:
             try:
                 CModificar = int(input("\nIngresa la cantidad a vender: "))
             except ValueError:
                 print("Valor no valido.")
-            if CModificar > repuesto.cantidad:
+            if CModificar > self.temprepuesto.cantidad:
                 print("El valor ingresado supera el Stock.")
-            elif CModificar <= repuesto.cantidad:
-                repuesto.cantidad = repuesto.cantidad - CModificar
+            elif CModificar <= self.temprepuesto.cantidad:
+                self.temprepuesto.cantidad = self.temprepuesto.cantidad - CModificar
                 Estado3 = False
         
     def eliminarrepuresto(self):
-        VEliminar = ""
-        while VEliminar == "":
-            try:
-                VEliminar = input("\nIngresa el repuesto a eliminar: ")
-            except ValueError:
-                print("Valor no valido.")
-        for repuesto in self.H:
-            if repuesto == VEliminar:
-                print(f"\nEl repuesto {VEliminar} ha sido eliminado.")
-                self.H.pop()
+        while True:
+            if self.Hvehiculos[-1].marca == self.buscar:
+                print(f"\nEl repuesto {self.buscar} ha sido eliminado.")
+                self.Hvehiculos.pop()
+                break
             else:
-                self.Temp.append(self)
+                self.Temp.append(self.Hvehiculos.pop())
                 
-        if not self.Temp:
-            for elemento in self.Temp:
-                self.H.append(elemento)
+        while True:
+            if not self.Temp:
+                for elemento in self.Temp:
+                    self.Hvehiculos.append(elemento)
+            else:
+                break
