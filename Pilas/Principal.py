@@ -148,27 +148,19 @@ class Pila:
             print(i)
             
 class VHonda:
-    def crearpila(self):
-        Hvehiculos = deque()
-        Temp = deque()
-        self.Hvehiculos = Hvehiculos
-        self.Temp = Temp
+    def __init__(self):
+        self.Hvehiculos = deque()
+        self.Temp = deque()
         
     def ingresarrepuestos(self):
         estado = True
         while estado:
             print("\nA continuación ingresa los datos del vehiculo: ")
-            M,R,C,P,Otro = "","",-1,0.0,""
+            M,R,C,P = "","",-1,0.0
             while M == "":
-                try:
-                    M = input("Ingresa el nombre del repuesto: ")
-                except ValueError:
-                    print("Valor no valido.")
+                M = input("Ingresa el nombre del repuesto: ")
             while R == "":
-                try:
-                    R = input("Ingresa la referencia: ")
-                except ValueError:
-                    print("Valor no valido.")
+                R = input("Ingresa la referencia: ")
             while C == -1:
                 try:
                     C = int(input("Ingresa la cantidad: "))
@@ -176,15 +168,12 @@ class VHonda:
                     print("Valor no valido.")
             while P == 0.0:
                 try:
-                    P = input("Ingresa el precio: ")
+                    P = float(input("Ingresa el precio: "))
                 except ValueError:
                     print("Valor no valido.")
-# POR REVISAR!!!!!!!!!!!!!!
-            while Otro != ["s","n"]:
-                try:
-                    Otro = input("\nDesea ingresar otro producto (S/N): ")
-                except ValueError:
-                    print("Valor no valido.")
+            Otro = ""
+            while Otro.lower() not in ["s","n"]:
+                Otro = input("\nDesea ingresar otro producto (S/N): ")
                 if "n" == Otro.lower():
                     estado = False
                     break
@@ -193,11 +182,8 @@ class VHonda:
     def buscarrepuesto(self):
         buscar = ""
         while buscar == "":
-            try:
-                buscar = input("\nIngresa el repuesto a buscar: ")
-                self.buscar = buscar
-            except ValueError:
-                print("Valor no valido.")
+            buscar = input("\nIngresa el repuesto a buscar: ")
+            self.buscar = buscar
                 
         for repuesto in self.Hvehiculos:
             if repuesto.marca == self.buscar:
@@ -210,7 +196,7 @@ class VHonda:
     def modificarinformacion(self):
                 print("\n¿Qué dato desea modificar?\n1. Marca\n2. Referencia\n3. Cantidad\n1. Precio")
                 opcion = 0
-                while opcion == 0:
+                while opcion not in [1,2,3,4]:
                     try:
                         opcion = int(input("\nIngresa la opción: "))                    
                     except ValueError:
@@ -218,30 +204,24 @@ class VHonda:
                 if opcion == 1:
                     cambio = ""
                     while cambio == "":
-                        try:
-                            cambio = int(input("\nIngresa el nuevo valor:"))
+                            cambio = input("\nIngresa el nuevo valor:")
                             self.temprepuesto.marca = cambio                    
-                        except ValueError:
-                            print("Valor no valido.")
                 if opcion == 2:
                     cambio = ""
                     while opcion == "":
-                        try:
-                            cambio = int(input("\nIngresa el nuevo valor:"))
-                            self.temprepuesto.referencia = cambio                    
-                        except ValueError:
-                            print("Valor no valido.")
+                        cambio = input("\nIngresa el nuevo valor:")
+                        self.temprepuesto.referencia = cambio                    
                 if opcion == 3:
                     cambio = -1
-                    while opcion == -1:
+                    while opcion < 0:
                         try:
                             cambio = int(input("\nIngresa el nuevo valor:"))
                             self.temprepuesto.cantidad = cambio                    
                         except ValueError:
                             print("Valor no valido.")
                 if opcion == 4:
-                    cambio = 0.0
-                    while opcion == 0.0:
+                    cambio = -1.0
+                    while opcion < 0:
                         try:
                             cambio = int(input("\nIngresa el nuevo valor:"))
                             self.temprepuesto.precio = cambio                    
@@ -262,7 +242,7 @@ class VHonda:
                 Estado3 = False
         
     def eliminarrepuresto(self):
-        while True:
+        while self.Hvehiculos:
             if self.Hvehiculos[-1].marca == self.buscar:
                 print(f"\nEl repuesto {self.buscar} ha sido eliminado.")
                 self.Hvehiculos.pop()
@@ -270,9 +250,5 @@ class VHonda:
             else:
                 self.Temp.append(self.Hvehiculos.pop())
                 
-        while True:
-            if not self.Temp:
-                for elemento in self.Temp:
-                    self.Hvehiculos.append(elemento)
-            else:
-                break
+        while self.Temp:
+            self.Hvehiculos.append(self.Temp.pop())
