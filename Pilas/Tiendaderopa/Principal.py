@@ -30,8 +30,8 @@ class Tienda:
             if self.inventarioP:
                 for prenda in self.inventarioP:
                     if prenda.marca == M:
-                        prenda.referencia = R
-                        prenda.precio = P
+#                        prenda.referencia = R
+#                        prenda.precio = P
                         prenda.cantidad += C
                         print("\nEl producto a registrar ya existe, se actualiza información.")
                     else:
