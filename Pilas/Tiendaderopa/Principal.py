@@ -3,9 +3,12 @@ import ObjPrendas as ObjP
 
 class Tienda:
     def __init__(self):
-        self.inventarioP = deque()
-        self.inventarioS = deque()
-        self.inventarioT = deque()
+        inventarioP = deque()
+        inventarioS = deque()
+        inventarioT = deque()
+        self.inventarioP = inventarioP
+        self.inventarioS = inventarioS
+        self.inventarioT = inventarioT
         self.tempprenda = None
         
     def registro(self):
@@ -30,13 +33,13 @@ class Tienda:
             if self.inventarioP:
                 for prenda in self.inventarioP:
                     if prenda.marca == M:
-#                        prenda.referencia = R
-#                        prenda.precio = P
                         prenda.cantidad += C
                         print("\nEl producto a registrar ya existe, se actualiza información.")
+                        break
                     else:
                         self.inventarioP.append(ObjP.Prendas(M,R,P,C))
                         print("\nRegistro exitoso.")
+                        break
             elif not self.inventarioP:
                 self.inventarioP.append(ObjP.Prendas(M,R,P,C))
                 print("\nRegistro exitoso.")
@@ -51,38 +54,34 @@ class Tienda:
             buscar = ""
             while buscar == "":
                 buscar = input("\nIngresa el producto a buscar: ")
-            for prenda in self.inventarioP:
-                if prenda.marca == buscar:
-                    self.tempprenda = prenda
-                    print(f"\n- Marca: {prenda.marca}",
-                          "\n- Referencia: {prenda.referencia}",
-                          "\n- Precio: {prenda.precio}",
-                          "\n- Cantidad: {prenda.cantidad}")
+                encontrado = False
+                for prenda in self.inventarioP:
+                    if prenda.marca == buscar:
+                        self.tempprenda = prenda
+                        print(f"\n- Marca: {prenda.marca}",
+                            "\n- Referencia: {prenda.referencia}",
+                            "\n- Precio: {prenda.precio}",
+                            "\n- Cantidad: {prenda.cantidad}")
+                        encontrado = True
+                        break
+                if not encontrado:
+                    print("\nProducto no encontrado.")
         else:
             print("\nInventario vacio.")
             
     def modificar(self):
-        Objtienda = Tienda
-        Objtienda.busquedaproducto()
-        print("\n¿Qué dato desea modificar? \n1. Marca.\n2. Referencia.\n3. Precio.\n4. Cantidad.")
+        if not self.tempprenda:
+            print("\nNo hay un producto seleccionado para modificar. Realice una búsqueda primero.")
+            return
+        print("\n¿Qué dato desea modificar? \n1. Precio.\n2. Cantidad.")
         opcion = 0
-        while opcion not in [1,2,3,4]:
+        while opcion not in [1,2]:
                 try:
                     opcion = int(input("Ingresa la opción: "))
                 except ValueError:
                     print("Valor no valido.")
-        M,R,P,C = "","",-1.0,-1
+        P,C = -1.0,-1
         if opcion == 1:
-            while M == "":
-                M = input("\nIngresa la nueva marca: ")
-            self.tempprenda.marca = M
-            print("\nModificación exitosa.")
-        elif opcion == 2:
-            while R == "":
-                R = input("Ingresa la nueva referencia: ")
-            self.tempprenda.referencia = R
-            print("\nModificación exitosa.")
-        elif opcion == 3:
             while P < 0:
                 try:
                     P = float(input("Ingresa el nueva precio: "))
@@ -90,7 +89,7 @@ class Tienda:
                     print("Valor no valido.")
             self.tempprenda.precio = P
             print("\nModificación exitosa.")
-        elif opcion == 4:
+        elif opcion == 2:
             while C < 0:
                 try:
                     C = int(input("Ingresa la nueva cantidad: "))
@@ -100,8 +99,6 @@ class Tienda:
             print("\nModificación exitosa.")
             
     def venta(self):
-        Objtienda = Tienda
-        Objtienda.busquedaproducto()
         cantidad = -1
         while cantidad < 0:
             try:
