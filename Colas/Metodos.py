@@ -73,10 +73,17 @@ class MetodosEquipos:
                     precio = float(input("precio: "))
                 except ValueError:
                     print("Valor no valido.")
-            while disponible == "":
-                disponible = input("disponible (Si/No): ")
-            busqueda = True
-            while busqueda:
+            while disponible not in [1,2]:
+                try:
+                    disponible = int(input("disponible (1. Si/2. No): "))
+                except ValueError:
+                    print("Valor no valido.")
+            if disponible == 1:
+                disponible = "Disponible."
+            elif disponible == 2:
+                disponible = "No disponible."
+            busquedapc,busquedapcnoexiste = True, True
+            while busquedapc:
                 if self.cpcs:
                     for i in self.cpcs:
                         if i.serial.lower() == serial.lower():
@@ -87,15 +94,19 @@ class MetodosEquipos:
                             i.dduro = dduro
                             i.precio = precio
                             i.disponible = disponible
-                            busqueda = False
+                            busquedapc = False
+                            busquedapcnoexiste = False
+                    if busquedapcnoexiste == True:
+                        self.cpcs.append(ObjE.Pc(serial, marca, mram, dduro, precio, disponible.lower()))
+                        print("\nRegistro exitoso.")
+                        busquedapc = False
                 else:
-                    self.cpcs.append(
-                        ObjE.Pc(serial, marca, mram, dduro, precio, disponible.lower())
-                    )
-                    busqueda = False
+                    self.cpcs.append(ObjE.Pc(serial, marca, mram, dduro, precio, disponible.lower()))
+                    print("\nRegistro exitoso.")
+                    busquedapc = False
         elif opcion == 2:
             print("\nIngresa los datos del equipo: ")
-            serial, marca, mram, tamano, precio, disponible = ("",-1.0,"",-1,-1,-1.0,"",)
+            serial, marca, mram, tamano, precio, disponible = "","",-1,-1.0,-1.0,""
             while serial == "":
                 serial = input("\nserial: ")
             while marca == "":
@@ -115,21 +126,123 @@ class MetodosEquipos:
                     precio = float(input("precio: "))
                 except ValueError:
                     print("Valor no valido.")
-            while disponible == "":
-                disponible = float(input("disponible (Si/No): "))
+            while disponible not in [1,2]:
+                try:
+                    disponible = int(input("disponible (1. Si/2. No): "))
+                except ValueError:
+                    print("Valor no valido.")
+            if disponible == 1:
+                disponible = "Disponible."
+            elif disponible == 2:
+                disponible = "No disponible."
+            busquedatablet, busquedatabletnoexiste = True, True
+            while busquedatablet:
+                if self.ctablets:
+                    for i in self.ctablets:
+                        if i.serial.lower() == serial.lower():
+                            print(
+                                "El dispositivo ya se encuentra registrado, se actualizan datos."
+                            )
+                            i.mram = mram
+                            i.tamano = tamano
+                            i.precio = precio
+                            i.disponible = disponible
+                            busquedatablet = False
+                            busquedatabletnoexiste = False
+                    if busquedatabletnoexiste == True:
+                        self.ctablets.append(ObjE.Tablet(serial, marca, mram, tamano, precio, disponible.lower()))
+                        print("\nRegistro exitoso.")
+                        busquedatablet = False
+                else:
+                    self.ctablets.append(ObjE.Tablet(serial, marca, mram, tamano, precio, disponible.lower()))
+                    print("\nRegistro exitoso.")
+                    busquedatablet = False
 
     def prestar(self):
         print("\nIngresa los datos del prestamo: ")
-        serial, nomestudiante, carnet = "", "", -1
-        while serial == "":
-            serial = input("\nserial: ")
-        while marca == "":
-            marca = input("\nNombre estudiante: ")
-        while mram == -1:
+        tipoprestamo, serial, nomestudiante, carnet = -1, "", "", -1
+        while nomestudiante == "":
+            nomestudiante = input("\nNombre estudiante: ")
+        while carnet == -1:
             try:
-                mram = int(input("No carnet: "))
+                carnet = int(input("No carnet: "))
             except ValueError:
                 print("Valor no valido.")
+        print("- Qué dispositivo desea prestar: \n1. Computador.\n2. Tablet.")
+        while tipoprestamo not in [1,2]:
+            try:
+                tipoprestamo = int(input("\nIngresa una opción: "))
+            except ValueError:
+                print("Valor no valido.")   
+        while serial == "":
+            serial = input("\nserial: ")
+            busquedaprestamo = True
+            while busquedaprestamo:
+                if tipoprestamo == 1:
+                    if self.cpcs:
+                        for i in self.cpcs:
+                            if i.serial.lower() == serial.lower() and i.disponible.lower() == "disponible":
+                                print("El dispositivo se encuentra registrado bajo las siguientes especificaciones:",
+                                    f"\n- Serial: {i.serial}",
+                                    f"\n- Marca: {i.marca}",
+                                    f"\n- Ram: {i.mram}",
+                                    f"\n- Disco duro: {i.dduro}",
+                                    f"\n- Precio: {i.precio}",
+                                    f"\n- Disponibilidad: {i.disponible}")
+                                confirmarcompra = -1
+                                while confirmarcompra not in [1,2]:
+                                    try:
+                                        confirmarcompra = int(input("Ingresa 1 para confirmar prestamo, o 0 para cancelar: "))
+                                    except ValueError:
+                                        print("Valor no valido.")
+                                if confirmarcompra == 1:
+                                    self.cestudiantes.append(ObjE.Estudiantes(serial,nomestudiante,carnet))
+                                    i.disponible = "No disponible"
+                                    busquedaprestamo = False
+                                    print("Prestamo exitoso.")
+                                    break
+                                elif confirmarcompra == 0:
+                                    print("Prestamo cancelado.")
+                                    busquedaprestamo = False
+                                    break
+                            else:
+                                print("\nEl dispositivo buscado no existe o no esta disponible, intenta nuevamente.")
+                    else:
+                        print("\nNo hay dispositivos disponible para prestamos.")
+                        busquedaprestamo = False
+
+                elif tipoprestamo == 2:
+                    if self.ctablets:
+                        for i in self.ctablets:
+                            if i.serial.lower() == serial.lower() and i.disponible.lower() == "disponible":
+                                print("El dispositivo se encuentra registrado bajo las siguientes especificaciones:",
+                                    f"\n- Serial: {i.serial}",
+                                    f"\n- Marca: {i.marca}",
+                                    f"\n- Ram: {i.mram}",
+                                    f"\n- Tamaño: {i.tamano}",
+                                    f"\n- Precio: {i.precio}",
+                                    f"\n- Disponibilidad: {i.disponible}")
+                                confirmarcompra = -1
+                                while confirmarcompra not in [1,2]:
+                                    try:
+                                        confirmarcompra = int(input("Ingresa 1 para confirmar prestamo, o 0 para cancelar: "))
+                                    except ValueError:
+                                        print("Valor no valido.")
+                                if confirmarcompra == 1:
+                                    self.cestudiantes.append(ObjE.Estudiantes(serial,nomestudiante,carnet))
+                                    i.disponible = "No disponible"
+                                    busquedaprestamo = False
+                                    print("Prestamo exitoso.")
+                                    break
+                                elif confirmarcompra == 0:
+                                    print("Prestamo cancelado.")
+                                    busquedaprestamo = False
+                                    break
+                            else:
+                                print("\nEl dispositivo buscado no existe o no esta disponible, intenta nuevamente.")
+                    else:
+                        print("\nNo hay dispositivos disponible para prestamos.")
+                        busquedaprestamo = False
 
     def mostrarpc(self):
         if self.cpcs:
