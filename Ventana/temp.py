@@ -13,7 +13,7 @@ class Personas:
 class Formulario:
     def __init__(self):
         menu = ctk.CTk()
-        #menu.geometry("500x400")
+        menu.geometry("+300+200")
         menu.resizable(False,False)
 
         imagen = ctk.CTkImage(light_image=Image.open("C:/Users/Anbran12/Documents/Python/Broken-project/Ventana/estadisticas.png"),
@@ -40,7 +40,7 @@ class Formulario:
     def registro(self):
         pantallaregistro = ctk.CTkToplevel()
         pantallaregistro.title("Registro")
-        #pantallaregistro.geometry("500x400")
+        pantallaregistro.geometry("+300+200")
         pantallaregistro.resizable(False,False)
 
         frame = ctk.CTkFrame(pantallaregistro, width= 400, height= 150, border_color= "grey", border_width=2)
@@ -66,7 +66,7 @@ class Formulario:
         self.etiqueta4.grid(row=3, column=0, pady=10, padx= 25)
         self.checkbox4 = ctk.CTkCheckBox(frame, text="Mapache", border_width=2)
         self.checkbox4.grid(row=3, column=1, pady=10, padx= 10)
-        boton4 = ctk.CTkButton(frame, text="Ventana 2", command=self.ventana2)
+        boton4 = ctk.CTkButton(frame, text="Ventana 2", command=self.ventanaerror)
         boton4.grid(row=4, column=1, pady=10, padx=10)
         
         pantallaregistro.focus()
@@ -75,7 +75,7 @@ class Formulario:
     def ventana2(self):
         ventana2 = ctk.CTkToplevel()
         ventana2.title("Datos")
-        #ventana2.geometry("300x100")
+        ventana2.geometry("+300+200")
         ventana2.resizable(False,False)
         ventana2.focus()
         ventana2.grab_set()
@@ -100,12 +100,19 @@ class Formulario:
         
     def ventanaerror(self):
         error = ctk.CTkToplevel()
-        #error.geometry("300x100")
+        error.geometry("+300+200")
+        
         error.resizable(False,False)
-        if detalleerror == 1:
-            pass
-        elif detalleerror == 2:
-            pass
+        if not self.entrada1.get():
+            ctk.CTkLabel(error, text="El campos nombre debe estar diligenciado", pady=20, padx=20).pack()
+        if not self.entrada2.get():
+            ctk.CTkLabel(error, text="El campos edad debe estar diligenciado", pady=20, padx=20).pack()
+        elif self.entrada2.get():
+            valor = self.entrada2.get()
+            try:
+                int(valor)
+            except ValueError:
+                ctk.CTkLabel(error, text="Valor ingresado en campo Edad no es valido, no es un número entero", pady=20, padx=20).pack()
         error.focus()
         error.grab_set()
 

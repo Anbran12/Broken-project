@@ -22,6 +22,9 @@ ingresousuario.pack()
 # Boton
 boton = ctk.CTkButton(ventana, text="presionar", command="Aqui se asigna una función al boton.")
 boton.pack()
-
+# Ocultar ventana para ser reemplazada por otra de manera temporal.
+ventana.withdraw()
+# Volver a mostrar ventana oculta con la instrucción anterior.
+ventana.deiconify()
 # Obligatorio para que la ventana se muestre.
 ventana.mainloop()
