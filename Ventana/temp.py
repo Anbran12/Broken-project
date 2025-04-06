@@ -1,101 +1,112 @@
-from collections import deque
-import tkinter as tk
+import customtkinter as ctk
+from PIL import Image
 
-class PcPrueba:
-    def __init__(self, serial, marca, mram, dduro, precio, disponible):
-        self.serial = serial
-        self.marca = marca
-        self.mram = mram
-        self.dduro = dduro
-        self.precio = precio
-        self.disponible = disponible
+basededatos = []
 
-class MetodosEquiposPrueba:
+class Personas:
+    def __init__(self, nombre, edad, sexo, animal):
+        self.nombre = nombre
+        self.edad = edad
+        self.sexo = sexo
+        self.animal = animal
+
+class Formulario:
     def __init__(self):
-        self.cpcs = deque()
-        self.ctablets = deque()
-        self.cestudiantes = deque()
+        menu = ctk.CTk()
+        #menu.geometry("500x400")
+        menu.resizable(False,False)
 
-    def asignarycerrarPrueba(self):
-        serial = self.entryserial.get()
-        marca = self.entrymarca.get()
-        mram = self.entrymram.get()
-        dduro = self.entrydduro.get()
-        precio = self.entryprecio.get()
+        imagen = ctk.CTkImage(light_image=Image.open("C:/Users/Anbran12/Documents/Python/Broken-project/Ventana/estadisticas.png"),
+                            dark_image=Image.open("C:/Users/Anbran12/Documents/Python/Broken-project/Ventana/estadisticas.png"),
+                            size=(200, 200))
 
-        # Verificación de disponibilidad
-        if self.entrydisponible.get() == "1":
-            disponible = "Disponible."
-        elif self.entrydisponible.get() == "2":
-            disponible = "No disponible."
-        else:
-            print("Valor de disponibilidad no válido.")
-            return
+        etiquetaimagen = ctk.CTkLabel(menu, image=imagen,text="")
+        etiquetaimagen.grid(row=0, column= 0, pady=20, padx=20)
+
+        marcobotones = ctk.CTkFrame(menu)
+        marcobotones.grid(row= 0, column= 1, padx=20)
+
+        botonregistro1 = ctk.CTkButton(marcobotones, width=100, height= 30, border_width=2, text="Registro", command=self.registro)
+        botonregistro1.grid(row=0, column=0, pady=20, padx=20)
+
+        botonregistro2 = ctk.CTkButton(marcobotones, width=100, height= 30, border_width=2, text="Prestamo")
+        botonregistro2.grid(row=1, column=0)
+
+        botonregistro3 = ctk.CTkButton(marcobotones, width=100, height= 30, border_width=2, text="Devolución")
+        botonregistro3.grid(row=2, column=0, pady=20, padx=20)
+
+        menu.mainloop()
+
+    def registro(self):
+        pantallaregistro = ctk.CTkToplevel()
+        pantallaregistro.title("Registro")
+        #pantallaregistro.geometry("500x400")
+        pantallaregistro.resizable(False,False)
+
+        frame = ctk.CTkFrame(pantallaregistro, width= 400, height= 150, border_color= "grey", border_width=2)
+        frame.grid(row=0, pady= 25, padx=25)
+
+        self.etiqueta1 = ctk.CTkLabel(frame, text="Nombre")
+        self.etiqueta1.grid(row=0, column=0, pady=10, padx= 25)
+        self.entrada1 = ctk.CTkEntry(frame)
+        self.entrada1.grid(row=0, column=1, pady=10, padx= 10)
+
+        self.etiqueta2 = ctk.CTkLabel(frame, text="Edad")
+        self.etiqueta2.grid(row=1, column=0, pady=10, padx= 25)
+        self.entrada2 = ctk.CTkEntry(frame)
+        self.entrada2.grid(row=1, column=1, pady=10, padx= 10)
+
+        self.etiqueta3 = ctk.CTkLabel(frame, text="Sexo")
+        self.etiqueta3.grid(row=2, column=0, pady=10, padx= 25)
+        self.combobox3 = ctk.CTkComboBox(frame,values=["Hombre","Mujer","Otro"],state="readonly")
+        self.combobox3.set("Hombre")
+        self.combobox3.grid(row=2, column=1, pady=10, padx= 10)
+
+        self.etiqueta4 = ctk.CTkLabel(frame, text="¿Eres un mapache?")
+        self.etiqueta4.grid(row=3, column=0, pady=10, padx= 25)
+        self.checkbox4 = ctk.CTkCheckBox(frame, text="Mapache", border_width=2)
+        self.checkbox4.grid(row=3, column=1, pady=10, padx= 10)
+        boton4 = ctk.CTkButton(frame, text="Ventana 2", command=self.ventana2)
+        boton4.grid(row=4, column=1, pady=10, padx=10)
         
-        self.cpcs.append(PcPrueba(serial, marca, mram, dduro, precio, disponible))
-        print("\nRegistro exitoso.")
-        self.ventana.quit()
+        pantallaregistro.focus()
+        pantallaregistro.grab_set()
 
-    def ingresoequiposPrueba(self):
-        self.ventana = tk.Tk()
-        self.ventana.title("Ingresa los datos del equipo:")
+    def ventana2(self):
+        ventana2 = ctk.CTkToplevel()
+        ventana2.title("Datos")
+        #ventana2.geometry("300x100")
+        ventana2.resizable(False,False)
+        ventana2.focus()
+        ventana2.grab_set()
+        labelv2 = ctk.CTkLabel(ventana2, text="Datos ingresados:")
+        labelv2.pack(pady=2,padx=10)
+        framev2 = ctk.CTkFrame(ventana2, border_width=2, border_color="gray")
+        framev2.pack(pady=10, padx=10)
+        labelnombret = ctk.CTkLabel(framev2, text="Nombre:", width=100, height=30)
+        labelnombret.grid(row=1,column=0, pady=5, padx=5)
+        labelnombre = ctk.CTkLabel(framev2, text=self.entrada1.get(), width=100, height=30)
+        labelnombre.grid(row=1,column=1, pady=5, padx=5)
+        labelapellidot = ctk.CTkLabel(framev2, text="Apellido:", width=100, height=30)
+        labelapellidot.grid(row=2,column=0)
+        labelapellido = ctk.CTkLabel(framev2, text=self.entrada2.get(), width=100, height=30)
+        labelapellido.grid(row=2,column=1)
+        labelsexot = ctk.CTkLabel(framev2, text="Sexo:", width=100, height=30)
+        labelsexot.grid(row=3,column=0, pady=5, padx=5)
+        labelsexo = ctk.CTkLabel(framev2, text=self.combobox3.get(), width=100, height=30)
+        labelsexo.grid(row=3,column=1, pady=5, padx=5)
+        
+        
+        
+    def ventanaerror(self):
+        error = ctk.CTkToplevel()
+        #error.geometry("300x100")
+        error.resizable(False,False)
+        if detalleerror == 1:
+            pass
+        elif detalleerror == 2:
+            pass
+        error.focus()
+        error.grab_set()
 
-        # Configuración de las etiquetas y campos de entrada
-        etiquetaserial = tk.Label(self.ventana, text="Serial: ")
-        etiquetaserial.grid(row=0, column=0, padx=10, pady=5, sticky="e")
-        self.entryserial = tk.Entry(self.ventana)
-        self.entryserial.grid(row=0, column=1, padx=10, pady=5)
-
-        etiquetamarca = tk.Label(self.ventana, text="Marca: ")
-        etiquetamarca.grid(row=1, column=0, padx=10, pady=5, sticky="e")
-        self.entrymarca = tk.Entry(self.ventana)
-        self.entrymarca.grid(row=1, column=1, padx=10, pady=5)
-
-        etiquetamram = tk.Label(self.ventana, text="Ram: ")
-        etiquetamram.grid(row=2, column=0, padx=10, pady=5, sticky="e")
-        self.entrymram = tk.Entry(self.ventana)
-        self.entrymram.grid(row=2, column=1, padx=10, pady=5)
-
-        etiquetadduro = tk.Label(self.ventana, text="Disco duro: ")
-        etiquetadduro.grid(row=3, column=0, padx=10, pady=5, sticky="e")
-        self.entrydduro = tk.Entry(self.ventana)
-        self.entrydduro.grid(row=3, column=1, padx=10, pady=5)
-
-        etiquetaprecio = tk.Label(self.ventana, text="Precio: ")
-        etiquetaprecio.grid(row=4, column=0, padx=10, pady=5, sticky="e")
-        self.entryprecio = tk.Entry(self.ventana)
-        self.entryprecio.grid(row=4, column=1, padx=10, pady=5)
-
-        etiquetadisponible = tk.Label(self.ventana, text="Disponibilidad (1. Disponible. / 2. No disponible.): ")
-        etiquetadisponible.grid(row=5, column=0, padx=10, pady=5, sticky="e")
-        self.entrydisponible = tk.Entry(self.ventana)
-        self.entrydisponible.grid(row=5, column=1, padx=10, pady=5)
-
-        boton_asignar = tk.Button(self.ventana, text="Asignar y Cerrar", command=self.asignarycerrarPrueba)
-        boton_asignar.grid(row=6, columnspan=2, pady=10)
-
-        self.ventana.mainloop()
-
-    def mostrarpc(self):
-        if self.cpcs:
-            print("\nLista de computadores:")
-            count = 0
-            for i in self.cpcs:
-                count += 1
-                print(
-                    f"\nDispositivo {count}:",
-                    f"\n- Serial: {i.serial}",
-                    f"\n- Marca: {i.marca}",
-                    f"\n- Ram: {i.mram}",
-                    f"\n- Disco duro: {i.dduro}",
-                    f"\n- Precio: {i.precio}",
-                    f"\n- Disponibilidad: {i.disponible}"
-                )
-        else:
-            print("\nNo hay computadores registrados")
-
-
-# Crear el objeto y ejecutar el ingreso de equipos
-obj = MetodosEquiposPrueba()
-obj.ingresoequiposPrueba()
-obj.mostrarpc()
+obj = Formulario()
