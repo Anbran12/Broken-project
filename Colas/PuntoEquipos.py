@@ -10,4 +10,4 @@ Obj.mostrartablets()
 
 
 
-# Agregar, prestar, devolver, mostrar inventario.
+# Agregar OK, prestar, devolver, mostrar inventario OK.
