@@ -39,258 +39,154 @@ class MetodosComidas:
 
 class MetodosEquipos:
     def __init__(self):
-        self.cpcs = deque()
-        self.ctablets = deque()
-        self.cestudiantes = deque()
+        ccomputador = deque()
+        self.ccomputador = ccomputador
+        ctablet = deque()
+        self.ctablet = ctablet
 
-    def ingresoequipos(self):
-        print("\n¿Qué desea registrar?:", "\n1. Pc.", "\n2. Tablet.")
-        opcion = -1
-        while opcion not in [1, 2]:
+    def registrocomputadores(self):
+        varserial, varmarca, varmram, vardduro, varprecio, vardisponible = "", "", -1, -1, -1.0, True
+        print("\nIngresa los datos del equipo: ")
+        while varserial == "":
+            varserial = input("\nIngresa el serial: ")
+        while varmarca == "":
+            varmarca = input("Ingresa la marca: ")
+        while varmram < 0:
             try:
-                opcion = int(input("Ingresa la opción: "))
+                varmram = int(input("Ingresa valor de la ram: "))
             except ValueError:
-                print("Valor no valido.")
-        if opcion == 1:
-            print("\nIngresa los datos del equipo: ")
-            serial, marca, mram, dduro, precio, disponible = "", "", -1, -1, -1.0, ""
-            while serial == "":
-                serial = input("\nserial: ")
-            while marca == "":
-                marca = input("marca: ")
-            while mram == -1:
-                try:
-                    mram = int(input("Capacidad memoria RAM: "))
-                except ValueError:
-                    print("Valor no valido.")
-            while dduro == -1:
-                try:
-                    dduro = int(input("Disco duro: "))
-                except ValueError:
-                    print("Valor no valido.")
-            while precio == -1.0:
-                try:
-                    precio = float(input("precio: "))
-                except ValueError:
-                    print("Valor no valido.")
-            while disponible not in [1,2]:
-                try:
-                    disponible = int(input("disponible (1. Si/2. No): "))
-                except ValueError:
-                    print("Valor no valido.")
-            if disponible == 1:
-                disponible = "Disponible."
-            elif disponible == 2:
-                disponible = "No disponible."
-            busquedapc,busquedapcnoexiste = True, True
-            while busquedapc:
-                if self.cpcs:
-                    for i in self.cpcs:
-                        if i.serial.lower() == serial.lower():
-                            print(
-                                "El dispositivo ya se encuentra registrado, se actualizan datos."
-                            )
-                            i.mram = mram
-                            i.dduro = dduro
-                            i.precio = precio
-                            i.disponible = disponible
-                            busquedapc = False
-                            busquedapcnoexiste = False
-                    if busquedapcnoexiste == True:
-                        self.cpcs.append(ObjE.Pc(serial, marca, mram, dduro, precio, disponible.lower()))
-                        print("\nRegistro exitoso.")
-                        busquedapc = False
-                else:
-                    self.cpcs.append(ObjE.Pc(serial, marca, mram, dduro, precio, disponible.lower()))
-                    print("\nRegistro exitoso.")
-                    busquedapc = False
-        elif opcion == 2:
-            print("\nIngresa los datos del equipo: ")
-            serial, marca, mram, tamano, precio, disponible = "","",-1,-1.0,-1.0,""
-            while serial == "":
-                serial = input("\nserial: ")
-            while marca == "":
-                marca = input("marca: ")
-            while mram == -1:
-                try:
-                    mram = int(input("Capacidad memoria RAM: "))
-                except ValueError:
-                    print("Valor no valido.")
-            while tamano == -1.0:
-                try:
-                    tamano = float(input("Tamaño: "))
-                except ValueError:
-                    print("Valor no valido.")
-            while precio == -1.0:
-                try:
-                    precio = float(input("precio: "))
-                except ValueError:
-                    print("Valor no valido.")
-            while disponible not in [1,2]:
-                try:
-                    disponible = int(input("disponible (1. Si/2. No): "))
-                except ValueError:
-                    print("Valor no valido.")
-            if disponible == 1:
-                disponible = "Disponible."
-            elif disponible == 2:
-                disponible = "No disponible."
-            busquedatablet, busquedatabletnoexiste = True, True
-            while busquedatablet:
-                if self.ctablets:
-                    for i in self.ctablets:
-                        if i.serial.lower() == serial.lower():
-                            print(
-                                "El dispositivo ya se encuentra registrado, se actualizan datos."
-                            )
-                            i.mram = mram
-                            i.tamano = tamano
-                            i.precio = precio
-                            i.disponible = disponible
-                            busquedatablet = False
-                            busquedatabletnoexiste = False
-                    if busquedatabletnoexiste == True:
-                        self.ctablets.append(ObjE.Tablet(serial, marca, mram, tamano, precio, disponible.lower()))
-                        print("\nRegistro exitoso.")
-                        busquedatablet = False
-                else:
-                    self.ctablets.append(ObjE.Tablet(serial, marca, mram, tamano, precio, disponible.lower()))
-                    print("\nRegistro exitoso.")
-                    busquedatablet = False
-
-    def prestar(self):
-        print("\nIngresa los datos del prestamo: ")
-        tipoprestamo, serial, nomestudiante, carnet = -1, "", "", -1
-        while nomestudiante == "":
-            nomestudiante = input("\nNombre estudiante: ")
-        while carnet == -1:
+                print("Valor no valido")
+        while vardduro < 0:
             try:
-                carnet = int(input("No carnet: "))
+                vardduro = int(input("Ingresa valor del disco duro: "))
             except ValueError:
-                print("Valor no valido.")
-        print("- Qué dispositivo desea prestar: \n1. Computador.\n2. Tablet.")
-        while tipoprestamo not in [1,2]:
+                print("Valor no valido")
+        while varprecio < 0:
             try:
-                tipoprestamo = int(input("\nIngresa una opción: "))
+                varprecio = float(input("Ingresa precio: "))
             except ValueError:
-                print("Valor no valido.")   
-        while serial == "":
-            serial = input("\nserial: ")
-            busquedaprestamo = True
-            while busquedaprestamo:
-                if tipoprestamo == 1:
-                    if self.cpcs:
-                        for i in self.cpcs:
-                            if i.serial.lower() == serial.lower() and i.disponible.lower() == "disponible":
-                                print("El dispositivo se encuentra registrado bajo las siguientes especificaciones:",
-                                    f"\n- Serial: {i.serial}",
-                                    f"\n- Marca: {i.marca}",
-                                    f"\n- Ram: {i.mram}",
-                                    f"\n- Disco duro: {i.dduro}",
-                                    f"\n- Precio: {i.precio}",
-                                    f"\n- Disponibilidad: {i.disponible}")
-                                confirmarcompra = -1
-                                while confirmarcompra not in [1,2]:
-                                    try:
-                                        confirmarcompra = int(input("Ingresa 1 para confirmar prestamo, o 0 para cancelar: "))
-                                    except ValueError:
-                                        print("Valor no valido.")
-                                if confirmarcompra == 1:
-                                    self.cestudiantes.append(ObjE.Estudiantes(serial,nomestudiante,carnet))
-                                    i.disponible = "No disponible"
-                                    busquedaprestamo = False
-                                    print("Prestamo exitoso.")
-                                    break
-                                elif confirmarcompra == 0:
-                                    print("Prestamo cancelado.")
-                                    busquedaprestamo = False
-                                    break
-                            else:
-                                print("\nEl dispositivo buscado no existe o no esta disponible, intenta nuevamente.")
-                    else:
-                        print("\nNo hay dispositivos disponible para prestamos.")
-                        busquedaprestamo = False
+                print("Valor no valido")
+                
+        estadobusqueda = True
+        if self.ccomputador:
+            for elemento in range(len(self.ccomputador)):
+                validaciondeexistencia = self.ccomputador[elemento].serial.lower()
+                if validaciondeexistencia == varserial.lower():
+                    print(f"\nEl computador {varserial} ya existe, se actualiza registro con información indicada.")
+                    self.ccomputador[elemento].mram = varmram
+                    self.ccomputador[elemento].dduro = vardduro
+                    self.ccomputador[elemento].precio = varprecio
+                    estadobusqueda = False
+            if estadobusqueda:
+                self.ccomputador.append(ObjE.Computador(varserial, varmarca, varmram, vardduro, varprecio, "Sin asignar", vardisponible))
+                print("\nRegistro exitoso.")
+                estadobusqueda = True
+        else: 
+            self.ccomputador.append(ObjE.Computador(varserial, varmarca, varmram, vardduro, varprecio, "Sin asignar", vardisponible))
+            print("\nRegistro exitoso.")
+            estadobusqueda = True
 
-                elif tipoprestamo == 2:
-                    if self.ctablets:
-                        for i in self.ctablets:
-                            if i.serial.lower() == serial.lower() and i.disponible.lower() == "disponible":
-                                print("El dispositivo se encuentra registrado bajo las siguientes especificaciones:",
-                                    f"\n- Serial: {i.serial}",
-                                    f"\n- Marca: {i.marca}",
-                                    f"\n- Ram: {i.mram}",
-                                    f"\n- Tamaño: {i.tamano}",
-                                    f"\n- Precio: {i.precio}",
-                                    f"\n- Disponibilidad: {i.disponible}")
-                                confirmarcompra = -1
-                                while confirmarcompra not in [1,2]:
-                                    try:
-                                        confirmarcompra = int(input("Ingresa 1 para confirmar prestamo, o 0 para cancelar: "))
-                                    except ValueError:
-                                        print("Valor no valido.")
-                                if confirmarcompra == 1:
-                                    self.cestudiantes.append(ObjE.Estudiantes(serial,nomestudiante,carnet))
-                                    i.disponible = "No disponible"
-                                    busquedaprestamo = False
-                                    print("Prestamo exitoso.")
-                                    break
-                                elif confirmarcompra == 0:
-                                    print("Prestamo cancelado.")
-                                    busquedaprestamo = False
-                                    break
-                            else:
-                                print("\nEl dispositivo buscado no existe o no esta disponible, intenta nuevamente.")
-                    else:
-                        print("\nNo hay dispositivos disponible para prestamos.")
-                        busquedaprestamo = False
+    def registrotablets(self):
+        varserial, varmarca, varmram, vartamano, varprecio, vardisponible = "", "", -1, -1.0, -1.0, True
+        print("\nIngresa los datos del equipo: ")
+        while varserial == "":
+            varserial = input("\nIngresa el serial: ")
+        while varmarca == "":
+            varmarca = input("Ingresa la marca: ")
+        while varmram < 0:
+            try:
+                varmram = int(input("Ingresa valor de la ram: "))
+            except ValueError:
+                print("Valor no valido")
+        while vartamano < 0:
+            try:
+                vartamano = int(input("Ingresa valor del tamaño: "))
+            except ValueError:
+                print("Valor no valido")
+        while varprecio < 0:
+            try:
+                varprecio = float(input("Ingresa precio: "))
+            except ValueError:
+                print("Valor no valido")
+        
+        estadobusqueda = True
+        if self.ctablet:
+            for elemento in range(len(self.ctablet)):
+                validaciondeexistencia = self.ctablet[elemento].serial.lower()
+                if validaciondeexistencia == varserial.lower():
+                    print(f"\nLa tablet {varserial} ya existe, se actualiza registro con información indicada.")
+                    self.ctablet[elemento].mram = varmram
+                    self.ctablet[elemento].dduro = vartamano
+                    self.ctablet[elemento].precio = varprecio
+                    estadobusqueda = False
+            if estadobusqueda:
+                self.ctablet.append(ObjE.Tablet(varserial, varmarca, varmram, vartamano, varprecio, "Sin asignar", vardisponible))
+                print("\nRegistro exitoso.")
+                estadobusqueda = True
+        else: 
+            self.ctablet.append(ObjE.Tablet(varserial, varmarca, varmram, vartamano, varprecio, "Sin asignar", vardisponible))
+            print("\nRegistro exitoso.")
+            estadobusqueda = True
 
-    def mostrarpc(self):
-        if self.cpcs:
-            print("\nLista de computadores:")
-            count = 0
-            for i in self.cpcs:
-                count += 1
-                print(
-                    f"\nDispositivo {count}:",
-                    f"\n- Serial: {i.serial}",
-                    f"\n- Marca: {i.marca}",
-                    f"\n- Ram: {i.mram}",
-                    f"\n- Disco duro: {i.dduro}",
-                    f"\n- Precio: {i.precio}",
-                    f"\n- Disponibilidad: {i.disponible}"
-                )
-        else:
-            print("\nNo hay computadores registrados")
+    def prestarcomputadores(self):
+        varserial, varmarca, varmram, vartamano, varprecio, vardisponible = "", "", -1, -1.0, -1.0, True
+        print("\nIngresa los datos del equipo a prestar: ")
+        while varserial == "":
+            varserial = input("\nIngresa el serial: ")
+        
+        estadobusqueda = True
+        if self.ccomputador:
+            for elemento in range(len(self.ccomputador)):
+                validaciondeexistencia = self.ccomputador[elemento].serial.lower()
+                validaciondedisponibilidad = self.ccomputador[elemento].disponible
+                if validaciondeexistencia == varserial.lower() and validaciondedisponibilidad == True:
+                    print(f"\nLa tablet {varserial} ya existe con los siguientes datos",
+                        f"\nSerial: {self.ccomputador[elemento].serial}",
+                        f"\nMarca: {self.ccomputador[elemento].marca}",
+                        f"\nRam: {self.ccomputador[elemento].mram}",
+                        f"\nD. Duro: {self.ccomputador[elemento].dduro}",
+                        f"\nPrecio {self.ccomputador[elemento].precio}")
+                    estadobusqueda = False
+            if estadobusqueda:
+                print("\nEl dispositivo buscado no existe o no esta disponible.")
+                estadobusqueda = True
+        else: 
+            print("\nNo hay dispositivos disponibles para pestamo.")
+            estadobusqueda = True
+        
 
-    def mostrartablet(self):
-        if self.ctablets:
-            print("\nLista de tablet:")
-            count = 0
-            for i in self.ctablets:
-                count += 1
-                print(
-                    f"\nDispositivo {count}:",
-                    f"\n- Serial: {i.serial}",
-                    f"\n- Marca: {i.marca}",
-                    f"\n- Ram: {i.mram}",
-                    f"\n- Tamaño: {i.tamano}",
-                    f"\n- Precio: {i.precio}",
-                    f"\n- Disponibilidad: {i.disponible}"
-                )
-        else:
-            print("\nNo hay tablets registradas")
+########################################################################################################################################
 
-    def mostrarprestamos(self):
-        if self.cestudiantes:
-            print("\nLista de dispositivos en prestamo:")
-            count = 0
-            for i in self.cestudiantes:
-                count += 1
-                print(
-                    f"\nDispositivo {count}:",
-                    f"\n- Serial: {i.serial}",
-                    f"\n- Estudiante: {i.nomestudiante}",
-                    f"\n- Carnet: {i.carnet}"
-                )
-        else:
-            print("\nNo hay prestamos registrados")
+    def mostrarcomputadores(self):
+        if self.ccomputador:
+            contador = 0
+            for elemento in range(len(self.ccomputador)):
+                contador += 1
+                print(f"\nComputador {contador}:",
+                      f"\nSerial: {self.ccomputador[elemento].serial}",
+                      f"\nMarca: {self.ccomputador[elemento].marca}",
+                      f"\nRam: {self.ccomputador[elemento].mram}",
+                      f"\nD. Duro: {self.ccomputador[elemento].dduro}",
+                      f"\nPrecio {self.ccomputador[elemento].precio}",
+                      f"\nDisponible: {self.ccomputador[elemento].disponible}",
+                      f"\nUsuario asignado: {self.ccomputador[elemento].usuario}")
+        else: 
+            print("\nNo hay computadores registrados.")
+
+    def mostrartablets(self):
+        if self.ctablet:
+            contador = 0
+            for elemento in range(len(self.ctablet)):
+                contador += 1
+                print(f"\nTablet {contador}:",
+                      f"\nSerial: {self.ctablet[elemento].serial}",
+                      f"\nMarca: {self.ctablet[elemento].marca}",
+                      f"\nRam: {self.ctablet[elemento].mram}",
+                      f"\nD. Duro: {self.ctablet[elemento].tamano}",
+                      f"\nPrecio {self.ctablet[elemento].precio}",
+                      f"\nDisponible: {self.ctablet[elemento].disponible}",
+                      f"\nUsuario asignado: {self.ctablet[elemento].usuario}")
+        else: 
+            print("\nNo tablets registradas.")
+        
+        #ObjE.Computador(varserial, varmarca, varmram, vardduro, varprecio, usuario="Sin asignar", vardisponible)
