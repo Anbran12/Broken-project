@@ -1,0 +1,5 @@
+NombreCliente: Carmen
+TipoComida: French Fries
+Cantidad: 13
+Precio: 13000.0
+---------------------------------------
