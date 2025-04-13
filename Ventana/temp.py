@@ -37,7 +37,7 @@ class Formulario:
         botonregistro3 = ctk.CTkButton(marcobotones, width=100, height= 30, border_width=2, text="Devolución")
         botonregistro3.grid(row=2, column=0, pady=10, padx=20)
 
-        botonregistro4 = ctk.CTkButton(marcobotones, width=100, height= 30, border_width=2, command=self.mostrardatos, text="Mostrar datos")
+        botonregistro4 = ctk.CTkButton(marcobotones, width=100, height= 30, border_width=2, command=self.mostrardatostop, text="Mostrar datos")
         botonregistro4.grid(row=3, column=0, pady=10, padx=20)
 
         menu.mainloop()
@@ -77,12 +77,30 @@ class Formulario:
         pantallaregistro.focus()
         pantallaregistro.grab_set()
 
-    def mostrardatos(self):
+    def mostrardatostop(self):
+        ventanamostrardatos = ctk.CTkToplevel()
+        ventanamostrardatos.title("Datos")
+        ventanamostrardatos.geometry("+300+200")
+#        ventanamostrardatos.resizable(False,False)
+        
         if basededatos:
+            columnas = ["Nombre", "Edad", "Sexo", "Animal"]
+            marcoencabezado = ctk.CTkFrame(ventanamostrardatos)
+            marcodatos = ctk.CTkScrollableFrame(ventanamostrardatos,border_width=1,border_color="black")
+            for i, nomcol in enumerate(columnas):
+                ctk.CTkLabel(marcoencabezado, text=nomcol, pady=20, padx=10, width=20).grid(row=0,column=i)
             for i in range(len(basededatos)):
-                print(basededatos[i])
+                ctk.CTkLabel(marcodatos, text=basededatos[i].nombre, pady=1, padx=2, width=20).grid(row=i+1,column=0)
+                ctk.CTkLabel(marcodatos, text=basededatos[i].edad, pady=1, padx=2, width=20).grid(row=i+1,column=1)
+                ctk.CTkLabel(marcodatos, text=basededatos[i].sexo, pady=1, padx=2, width=20).grid(row=i+1,column=2)
+                ctk.CTkLabel(marcodatos, text=basededatos[i].animal, pady=1, padx=2, width=20).grid(row=i+1,column=3)
+                print(basededatos[i].nombre,basededatos[i].edad,basededatos[i].sexo,basededatos[i].animal)
+            marcoencabezado.pack()
+            marcodatos.pack()
         else:
-            print("No hay datos para mostrar.")
+            ctk.CTkLabel(ventanamostrardatos, text="No hay datos por mostrar", pady=20, padx=20).pack()
+        ventanamostrardatos.focus()
+        ventanamostrardatos.grab_set()
     
     def ventana2(self):
         self.ventana2 = ctk.CTkToplevel()

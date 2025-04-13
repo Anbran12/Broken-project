@@ -70,3 +70,69 @@ for i, fila in enumerate(datos):
         celda.grid(row=i+1, column=j, padx=10, pady=5)
 
 app.mainloop()
+
+#-------------------------------------------------------------------------------------------------
+
+import customtkinter as ctk
+
+# Simulando datos (puedes usar tus objetos reales aquí)
+class Animalito:
+    def __init__(self, nombre, edad, sexo, animal):
+        self.nombre = nombre
+        self.edad = edad
+        self.sexo = sexo
+        self.animal = animal
+
+basededatos = [
+    Animalito("Luna", 3, "Hembra", "Perro"),
+    Animalito("Max", 5, "Macho", "Gato"),
+    Animalito("Coco", 2, "Macho", "Loro"),
+    Animalito("Nina", 4, "Hembra", "Conejo"),
+]
+
+# Crear ventana principal
+ventanamostrardatos = ctk.CTk()
+ventanamostrardatos.geometry("600x400")
+ventanamostrardatos.title("Tabla de Datos")
+
+# Contenedor principal para la tabla
+contenedor_tabla = ctk.CTkFrame(ventanamostrardatos)
+contenedor_tabla.pack(padx=10, pady=10, fill="both", expand=True)
+
+# Encabezados de columna
+columnas = ["Nombre", "Edad", "Sexo", "Animal"]
+marcoencabezado = ctk.CTkFrame(contenedor_tabla)
+marcoencabezado.pack(fill="x")
+
+for i, nomcol in enumerate(columnas):
+    label = ctk.CTkLabel(
+        marcoencabezado,
+        text=nomcol,
+        font=ctk.CTkFont(size=14, weight="bold"),
+        padx=10, pady=10,
+        width=120,
+        anchor="w"  # alinea a la izquierda
+    )
+    label.grid(row=0, column=i)
+
+# Datos con scroll
+marcodatos = ctk.CTkScrollableFrame(contenedor_tabla, border_width=1, border_color="gray")
+marcodatos.pack(fill="both", expand=True)
+
+# Mostrar datos
+for i, dato in enumerate(basededatos):
+    valores = [dato.nombre, dato.edad, dato.sexo, dato.animal]
+    for j, valor in enumerate(valores):
+        color_fondo = "#f0f0f0" if i % 2 == 0 else "#e0e0e0"  # estilo tipo rayado
+        label = ctk.CTkLabel(
+            marcodatos,
+            text=valor,
+            padx=10, pady=5,
+            width=120,
+            anchor="w",
+            fg_color=color_fondo
+        )
+        label.grid(row=i, column=j)
+
+# Ejecutar la interfaz
+ventanamostrardatos.mainloop()
