@@ -11,17 +11,14 @@ ventana.resizable(False,False) # Bloquear el tamaño de la ventana.
 ventana.attributes("-alpha",1) # Con -alpha y un valor se puede definir la transparencia de la ventana.
 
 # Etiqueta de texto (Label)
-label = ctk.CTkLabel(ventana, text= "Ingresa algo: ")
-label.pack()
+label = ctk.CTkLabel(ventana, text= "Ingresa algo: ").pack()
 # Marco (Frame)
-frame = ctk.CTkFrame(ventana, width=200, height=100)
-frame.pack()
+frame = ctk.CTkFrame(ventana, width=200, height=100).pack()
 # Cuandro de ingreso de datos (Entry)
 ingresousuario = ctk.CTkEntry(frame)
 ingresousuario.pack()
 # Boton
-boton = ctk.CTkButton(ventana, text="presionar", command="Aqui se asigna una función al boton.")
-boton.pack()
+boton = ctk.CTkButton(ventana, text="presionar", command="Aqui se asigna una función al boton.").pack()
 # Ocultar ventana para ser reemplazada por otra de manera temporal.
 ventana.withdraw()
 # Volver a mostrar ventana oculta con la instrucción anterior.
