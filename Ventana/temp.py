@@ -14,18 +14,18 @@ class Personas:
 
 class Formulario:
     def __init__(self):
-        menu = ctk.CTk()
-        menu.geometry("+300+200")
-        menu.resizable(False,False)
+        self.menu = ctk.CTk()
+        self.menu.geometry("+300+200")
+        self.menu.resizable(False,False)
 
         imagen = ctk.CTkImage(light_image=Image.open("C:/Users/Anbran12/Documents/Python/Broken-project/Ventana/estadisticas.png"),
                             dark_image=Image.open("C:/Users/Anbran12/Documents/Python/Broken-project/Ventana/estadisticas.png"),
                             size=(200, 200))
 
-        etiquetaimagen = ctk.CTkLabel(menu, image=imagen,text="")
+        etiquetaimagen = ctk.CTkLabel(self.menu, image=imagen,text="")
         etiquetaimagen.grid(row=0, column= 0, pady=20, padx=20)
 
-        marcobotones = ctk.CTkFrame(menu)
+        marcobotones = ctk.CTkFrame(self.menu)
         marcobotones.grid(row= 0, column= 1, padx=20)
 
         botonregistro1 = ctk.CTkButton(marcobotones, width=100, height= 30, border_width=2, text="Registro", command=self.registro)
@@ -37,18 +37,23 @@ class Formulario:
         botonregistro3 = ctk.CTkButton(marcobotones, width=100, height= 30, border_width=2, text="Devolución")
         botonregistro3.grid(row=2, column=0, pady=10, padx=20)
 
-        botonregistro4 = ctk.CTkButton(marcobotones, width=100, height= 30, border_width=2, command=self.mostrardatostop, text="Mostrar datos")
+        botonregistro4 = ctk.CTkButton(marcobotones, width=100, height= 30, border_width=2, command=self.mostrardatos, text="Mostrar datos")
         botonregistro4.grid(row=3, column=0, pady=10, padx=20)
 
-        menu.mainloop()
+        self.menu.mainloop()
+
+    def volver_al_menu(self):
+        self.pantallaregistro.destroy()
+        self.menu.deiconify()
 
     def registro(self):
-        pantallaregistro = ctk.CTkToplevel()
-        pantallaregistro.title("Registro")
-        pantallaregistro.geometry("+300+200")
-        pantallaregistro.resizable(False,False)
+        self.menu.withdraw()
+        self.pantallaregistro = ctk.CTkToplevel()
+        self.pantallaregistro.title("Registro")
+        self.pantallaregistro.geometry("+300+200")
+        self.pantallaregistro.resizable(False,False)
 
-        frame = ctk.CTkFrame(pantallaregistro, width= 400, height= 150, border_color= "grey", border_width=2)
+        frame = ctk.CTkFrame(self.pantallaregistro, width= 400, height= 150, border_color= "grey", border_width=2)
         frame.grid(row=0, pady= 25, padx=25)
 
         self.etiqueta1 = ctk.CTkLabel(frame, text="Nombre")
@@ -71,13 +76,13 @@ class Formulario:
         self.etiqueta4.grid(row=3, column=0, pady=10, padx= 25)
         self.checkbox4 = ctk.CTkCheckBox(frame, text="Mapache", border_width=2)
         self.checkbox4.grid(row=3, column=1, pady=10, padx= 10)
-        boton4 = ctk.CTkButton(frame, text="Ventana 2", command=self.ventanaerror)
-        boton4.grid(row=4, column=1, pady=10, padx=10)
+        ctk.CTkButton(frame, text="Registrar", command=self.ventanaerror).grid(row=4, column=1, pady=10, padx=10)
+        ctk.CTkButton(self.pantallaregistro, text="Volver", command=self.volver_al_menu).grid(pady=10, padx=10)
         
-        pantallaregistro.focus()
-        pantallaregistro.grab_set()
+        self.pantallaregistro.focus()
+        self.pantallaregistro.grab_set()
 
-    def mostrardatostop(self):
+    def mostrardatos(self):
         ventanamostrardatos = ctk.CTkToplevel()
         ventanamostrardatos.title("Datos")
         ventanamostrardatos.geometry("+300+200")
@@ -88,45 +93,18 @@ class Formulario:
             marcoencabezado = ctk.CTkFrame(ventanamostrardatos)
             marcodatos = ctk.CTkScrollableFrame(ventanamostrardatos,border_width=1,border_color="black")
             for i, nomcol in enumerate(columnas):
-                ctk.CTkLabel(marcoencabezado, text=nomcol, pady=20, padx=10, width=20).grid(row=0,column=i)
+                ctk.CTkLabel(marcoencabezado, text=nomcol, pady=20, padx=10, width=200, wraplength=200).grid(row=0,column=i)
             for i in range(len(basededatos)):
-                ctk.CTkLabel(marcodatos, text=basededatos[i].nombre, pady=1, padx=2, width=20).grid(row=i+1,column=0)
-                ctk.CTkLabel(marcodatos, text=basededatos[i].edad, pady=1, padx=2, width=20).grid(row=i+1,column=1)
-                ctk.CTkLabel(marcodatos, text=basededatos[i].sexo, pady=1, padx=2, width=20).grid(row=i+1,column=2)
-                ctk.CTkLabel(marcodatos, text=basededatos[i].animal, pady=1, padx=2, width=20).grid(row=i+1,column=3)
+                filas = [basededatos[i].nombre, basededatos[i].edad, basededatos[i].sexo, basededatos[i].animal]
+                for j, textfila in enumerate(filas):
+                    ctk.CTkLabel(marcodatos, text=textfila, pady=1, padx=2, width=200, wraplength=200).grid(row=i,column=j)
                 print(basededatos[i].nombre,basededatos[i].edad,basededatos[i].sexo,basededatos[i].animal)
-            marcoencabezado.pack()
-            marcodatos.pack()
+            marcoencabezado.pack(fill="x")
+            marcodatos.pack(fill="x")
         else:
-            ctk.CTkLabel(ventanamostrardatos, text="No hay datos por mostrar", pady=20, padx=20).pack()
+            ctk.CTkLabel(ventanamostrardatos, text="No hay datos por mostrar", pady=20, padx=50).pack()
         ventanamostrardatos.focus()
-        ventanamostrardatos.grab_set()
-    
-    def ventana2(self):
-        self.ventana2 = ctk.CTkToplevel()
-        self.ventana2.title("Datos")
-        self.ventana2.geometry("+300+200")
-        self.ventana2.resizable(False,False)
-        self.ventana2.focus()
-        self.ventana2.grab_set()
-        labelv2 = ctk.CTkLabel(self.ventana2, text="Datos ingresados:")
-        labelv2.pack(pady=2,padx=10)
-        framev2 = ctk.CTkFrame(self.ventana2, border_width=2, border_color="gray")
-        framev2.pack(pady=10, padx=10)
-        labelnombret = ctk.CTkLabel(framev2, text="Nombre:", width=100, height=30)
-        labelnombret.grid(row=1,column=0, pady=5, padx=5)
-        labelnombre = ctk.CTkLabel(framev2, text=self.entrada1.get(), width=100, height=30)
-        labelnombre.grid(row=1,column=1, pady=5, padx=5)
-        labelapellidot = ctk.CTkLabel(framev2, text="Apellido:", width=100, height=30)
-        labelapellidot.grid(row=2,column=0)
-        labelapellido = ctk.CTkLabel(framev2, text=self.entrada2.get(), width=100, height=30)
-        labelapellido.grid(row=2,column=1)
-        labelsexot = ctk.CTkLabel(framev2, text="Sexo:", width=100, height=30)
-        labelsexot.grid(row=3,column=0, pady=5, padx=5)
-        labelsexo = ctk.CTkLabel(framev2, text=self.combobox3.get(), width=100, height=30)
-        labelsexo.grid(row=3,column=1, pady=5, padx=5)
-        
-        
+        ventanamostrardatos.grab_set()   
         
     def ventanaerror(self):
         error = ctk.CTkToplevel()
@@ -134,21 +112,28 @@ class Formulario:
         error.focus()
         error.grab_set()        
         error.resizable(False,False)
+        
         if not self.entrada1.get():
             ctk.CTkLabel(error, text="El campo nombre debe estar diligenciado", pady=20, padx=20).pack()
-        else:
-            if not self.entrada2.get():
-                ctk.CTkLabel(error, text="El campo edad debe estar diligenciado", pady=20, padx=20).pack()
-            else:
-                if self.entrada2.get():
-                    valor = self.entrada2.get()
-                    try:
-                        int(valor)
-                    except ValueError:
-                        ctk.CTkLabel(error, text="Valor ingresado en campo Edad no es valido, no es un número entero", pady=20, padx=20).pack()
-                    ctk.CTkLabel(error, text=f"Datos registrados exitosamente.", pady=20, padx=20).pack()
-                    nombre, edad, sexo, animal = self.entrada1.get(), self.entrada2.get(), self.combobox3.get(), self.checkbox4.get()
-                    basededatos.append(Personas(nombre, edad, sexo, animal))
-                    botoncerrar = ctk.CTkButton(error, text="Aceptar", command=error.destroy).pack()
+            ctk.CTkButton(error, text="Aceptar", command=error.destroy).pack()
+            return
+        
+        if not self.entrada2.get():
+            ctk.CTkLabel(error, text="El campo edad debe estar diligenciado", pady=20, padx=20).pack()
+            ctk.CTkButton(error, text="Aceptar", command=error.destroy).pack()
+            return
+
+        valor = self.entrada2.get()
+        try:
+            int(valor)
+        except ValueError:
+            ctk.CTkLabel(error, text="Valor ingresado en campo Edad no es valido, no es un número entero", pady=20, padx=20).pack()
+            ctk.CTkButton(error, text="Aceptar", command=error.destroy).pack()
+            return
+            
+        ctk.CTkLabel(error, text=f"Datos registrados exitosamente.", pady=20, padx=20).pack()
+        nombre, edad, sexo, animal = self.entrada1.get(), self.entrada2.get(), self.combobox3.get(), self.checkbox4.get()
+        basededatos.append(Personas(nombre, edad, sexo, animal))
+        ctk.CTkButton(error, text="Aceptar", command=error.destroy).pack()
 
 obj = Formulario()
