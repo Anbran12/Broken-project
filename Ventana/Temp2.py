@@ -136,3 +136,32 @@ for i, dato in enumerate(basededatos):
 
 # Ejecutar la interfaz
 ventanamostrardatos.mainloop()
+
+
+#-----------------------------------------------------------------------------------------------------
+
+import customtkinter as ctk
+
+# Inicializar
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("blue")
+
+root = ctk.CTk()
+root.geometry("400x300")
+root.overrideredirect(True)  # Sin barra de título ni borde de SO
+
+# Simular un borde con un frame externo
+border_thickness = 4
+
+border = ctk.CTkFrame(root, corner_radius=0, fg_color="#00aaff")
+border.pack(padx=0, pady=0, fill="both", expand=True)
+
+# Frame interior que representa el "contenido"
+content = ctk.CTkFrame(border, corner_radius=10)
+content.pack(padx=border_thickness, pady=border_thickness, fill="both", expand=True)
+
+# Botón de cierre
+close_button = ctk.CTkButton(content, text="Cerrar", command=root.destroy)
+close_button.pack(pady=20)
+
+root.mainloop()

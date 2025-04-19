@@ -52,6 +52,7 @@ class Formulario:
         self.pantallaregistro.title("Registro")
         self.pantallaregistro.geometry("+300+200")
         self.pantallaregistro.resizable(False,False)
+        self.pantallaregistro.overrideredirect(True)
 
         frame = ctk.CTkFrame(self.pantallaregistro, width= 400, height= 150, border_color= "grey", border_width=2)
         frame.grid(row=0, pady= 25, padx=25)
