@@ -13,7 +13,10 @@ class Empleados:
         self.cargo = cargo
         self.jefe = jefe
         self.inactivo = inactivo
-
+        
+    def convertirlista(self):
+        return [self.id,self.nombre,self.apellido,self.cedula,self.email,self.telefono,self.direccion,self.cargo,self.jefe,self.inactivo]
+    
 class MetodosEmpleados:
     def registroempledos(self):
         ventanaregistro = ctk.CTkToplevel()
@@ -49,23 +52,25 @@ class MetodosEmpleados:
         self.entrydireccion.grid(row=6, column=1, pady=7, padx=10)
         
         ctk.CTkLabel(ventanaregistro, text="Cargo").grid(row=7, column=0, pady=7, padx=10)
-        self.entrycargo = ctk.CTkEntry(ventanaregistro)
+        cargos = ["Gerente General","Director de Finanzas (CFO)","Director de Operaciones (COO)","Gerente de Recursos Humanos","Jefe de Ventas","Coordinador de Marketing","Analista Financiero","Contador","Asistente Administrativo","Recepcionista","Desarrollador de Software","Diseñador Gráfico","Especialista en Atención al Cliente","Técnico de Soporte IT","Gerente de Proyecto","Ejecutivo de Ventas","Encargado de Logística","Auditor Interno","Community Manager","Oficinista o Auxiliar Administrativo"]
+        self.entrycargo = ctk.CTkComboBox(ventanaregistro, values=cargos, state="readonly")
+#        self.entrycargo = ctk.CTkEntry(ventanaregistro)
         self.entrycargo.grid(row=7, column=1, pady=7, padx=10)
         
         ctk.CTkLabel(ventanaregistro, text="Jefe").grid(row=8, column=0, pady=7, padx=10)
         self.entryjefe = ctk.CTkEntry(ventanaregistro)
         self.entryjefe.grid(row=8, column=1, pady=7, padx=10)        
         
-        ctk.CTkButton(ventanaregistro, text="Pulsame", command=self.validacionerror).grid(row=9, column=0, columnspan=2)
+        ctk.CTkButton(ventanaregistro, text="Registrar", command=self.validacionerror).grid(row=9, column=0, columnspan=2, pady=7, padx=10)
         
         
         
     def validacionerror(self):
-        ventanaerror = ctk.CTkToplevel()
-        ventanaerror.title("Error")
-        ventanaerror.geometry("+750+350")
-        ventanaerror.focus()
-        ventanaerror.grab_set()
+        self.ventanaerror = ctk.CTkToplevel()
+        self.ventanaerror.title("Error")
+        self.ventanaerror.geometry("+750+350")
+        self.ventanaerror.focus()
+        self.ventanaerror.grab_set()
         
         if not self.entrynombre.get():
             pass
@@ -89,4 +94,30 @@ class MetodosEmpleados:
             pass
         
         if not self.entryjefe.get():
-            pass        
+            pass
+        
+        ctk.CTkLabel(self.ventanaerror, text="Datos registados exitosamente.").pack(pady=15, padx=15)
+        nombre = self.entrynombre.get()
+        apellido = self.entryapellido.get()
+        cedula = self.entrycedula.get()
+        email = self.entryemail.get()
+        telefono = self.entrytelefono.get()
+        direccion = self.entrydireccion.get()
+        cargo = self.entrycargo.get()
+        jefe = self.entryjefe.get()
+        
+        with open("C:/Users/Anbran12/Documents/Python/Broken-project/Personal/Empleados/basededatos.csv", "a", newline="") as archivoregistro:
+            registrarenarchivo = csv.writer(archivoregistro)
+            nuevoregistro = Empleados(1,nombre,apellido,cedula,email,telefono,direccion,cargo,jefe)
+            registrarenarchivo.writerow(nuevoregistro.convertirlista())
+        
+        ctk.CTkButton(self.ventanaerror, text="Aceptar", command=self.ventanaerror.destroy).pack(pady=5, padx=15)
+        
+    def mostrarregistros(self):
+        self.ventanamostrarregistros = ctk.CTkToplevel()
+        self.ventanamostrarregistros.grab_set()
+        self.ventanamostrarregistros.focus()
+        self.ventanamostrarregistros.title("Tabla de registros")
+        self.ventanamostrarregistros.geometry("1000x600+300+100")
+        
+        

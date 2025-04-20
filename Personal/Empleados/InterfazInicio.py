@@ -13,7 +13,7 @@ class Interfaz:
         ctk.CTkButton(self.ventanainicio, text="Modificar").pack(pady=10)
         ctk.CTkButton(self.ventanainicio, text="Buscar por id").pack(pady=10)
         ctk.CTkButton(self.ventanainicio, text="Buscar por jefe").pack(pady=10)
-        ctk.CTkButton(self.ventanainicio, text="Mostrar registros").pack(pady=10)
+        ctk.CTkButton(self.ventanainicio, text="Mostrar registros", command=self.mostrarregistros).pack(pady=10)
         ctk.CTkButton(self.ventanainicio, text="Salir", hover_color="black", command=self.ventanainicio.destroy).pack(pady=10)
         
         self.ventanainicio.mainloop()
@@ -21,6 +21,8 @@ class Interfaz:
     def registro(self):
         a = Mt.MetodosEmpleados()
         a.registroempledos()
-
+    def mostrarregistros(self):
+        a = Mt.MetodosEmpleados()
+        a.mostrarregistros()
 
 prueba = Interfaz()

@@ -9,25 +9,14 @@ ventana.maxsize(1000, 600) # Tamaño máximo de la ventana.
 ventana.configure(bg="grey") # Indicar color de fondo de la ventana.
 ventana.resizable(False,False) # Bloquear el tamaño de la ventana.
 ventana.attributes("-alpha",1) # Con -alpha y un valor se puede definir la transparencia de la ventana.
-
-# Etiqueta de texto (Label)
-label = ctk.CTkLabel(ventana, text= "Ingresa algo: ").pack()
-# Marco (Frame)
-frame = ctk.CTkFrame(ventana, width=200, height=100).pack()
-# Cuandro de ingreso de datos (Entry)
-ingresousuario = ctk.CTkEntry(frame)
+label = ctk.CTkLabel(ventana, text= "Ingresa algo: ").pack() # Etiqueta de texto (Label)
+frame = ctk.CTkFrame(ventana, width=200, height=100).pack() # Marco (Frame)
+ingresousuario = ctk.CTkEntry(frame) # Cuandro de ingreso de datos (Entry)
 ingresousuario.pack()
-# Captura de datos ingresados en el entry
-ingresousuario.get()
-# Boton
-boton = ctk.CTkButton(ventana, text="presionar", command="Aqui se asigna una función al boton.").pack()
-# Hace foco en la ventana emergente (la ventana principal sigue siendo visible)
-ventana.focus()
-# Desactiva la ventana principal mientras esta esté abierta (la ventana principal sigue siendo visible)
-ventana.grab_set()   
-# Ocultar ventana para ser reemplazada por otra de manera temporal.
-ventana.withdraw()
-# Volver a mostrar ventana oculta con la instrucción anterior.
-ventana.deiconify()
-# Obligatorio para que la ventana se muestre.
-ventana.mainloop()
+ingresousuario.get() # Captura de datos ingresados en el entry
+boton = ctk.CTkButton(ventana, text="presionar", command="Aqui se asigna una función al boton.").pack() # Boton
+ventana.focus() # Hace foco en la ventana emergente (la ventana principal sigue siendo visible)
+ventana.grab_set() # Desactiva la ventana principal mientras esta esté abierta (la ventana principal sigue siendo visible)
+ventana.withdraw() # Ocultar ventana para ser reemplazada por otra de manera temporal.
+ventana.deiconify() # Volver a mostrar ventana oculta con la instrucción anterior.
+ventana.mainloop() # Obligatorio para que la ventana se muestre.
