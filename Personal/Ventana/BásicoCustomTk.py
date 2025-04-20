@@ -17,8 +17,14 @@ frame = ctk.CTkFrame(ventana, width=200, height=100).pack()
 # Cuandro de ingreso de datos (Entry)
 ingresousuario = ctk.CTkEntry(frame)
 ingresousuario.pack()
+# Captura de datos ingresados en el entry
+ingresousuario.get()
 # Boton
 boton = ctk.CTkButton(ventana, text="presionar", command="Aqui se asigna una función al boton.").pack()
+# Hace foco en la ventana emergente (la ventana principal sigue siendo visible)
+ventana.focus()
+# Desactiva la ventana principal mientras esta esté abierta (la ventana principal sigue siendo visible)
+ventana.grab_set()   
 # Ocultar ventana para ser reemplazada por otra de manera temporal.
 ventana.withdraw()
 # Volver a mostrar ventana oculta con la instrucción anterior.
