@@ -1,1 +1,17 @@
 id,nombre,apellido,cedula,email,telefono,direccion,cargo,jefe,inactivo
+1,Catalina,Atehortua,1000456125,catalina010@hotmail.com,3005697878,Cra 1 # 89 - 90,Recepcionista,Carlos Camargo,ACTIVO
+2,Luis,Fern�ndez,1001234567,luisf@gmail.com,3001112233,Cra 10 # 20-30,Gerente General,-,ACTIVO
+3,Mariana,G�mez,1012345678,mariana.gomez@empresa.com,3102223344,Cll 45 # 32-21,Coordinador de Marketing,Luis Fern�ndez,ACTIVO
+4,Juli�n,Ram�rez,1023456789,julianr@corp.net,3153334455,Cll 12 # 89-12,Desarrollador de Software,Mariana G�mez,ACTIVO
+5,Ana,Isaza,1034567890,ana.isaza@hotmail.com,3124445566,Av 7 # 50-10,Dise�ador Gr�fico,Juli�n Ram�rez,INACTIVO
+6,Pedro,Salazar,1045678901,pedros@empresa.com,3005556677,Cra 8 # 15-45,Director de Finanzas (CFO),Luis Fern�ndez,ACTIVO
+7,Laura,Cepeda,1056789012,lauracep@gmail.com,3016667788,Cll 30 # 60-70,Asistente Administrativo,Pedro Salazar,ACTIVO
+8,Camilo,Ortega,1067890123,camilo.ortega@empresa.com,3127778899,Cra 5 # 100-22,Analista Financiero,Pedro Salazar,ACTIVO
+9,Sof�a,Quintero,1078901234,sofia.q@hotmail.com,3138889900,Cll 18 # 40-11,Especialista en Atenci�n al Cliente,Laura Cepeda,ACTIVO
+10,Andr�s,Gallego,1089012345,andresg@corp.com,3149990011,Av 1 # 55-18,T�cnico de Soporte IT,Camilo Ortega,INACTIVO
+11,Tatiana,Ben�tez,1090123456,tati_benitez@gmail.com,3111011122,Cra 3 # 33-21,Community Manager,Mariana G�mez,ACTIVO
+12,H�ctor,Su�rez,1091234567,hectors@empresa.com,3102022233,Cll 23 # 70-65,Jefe de Ventas,Luis Fern�ndez,ACTIVO
+13,Daniela,Moreno,1092345678,dani.moreno@empresa.com,3153033344,Cra 9 # 80-14,Ejecutivo de Ventas,H�ctor Su�rez,ACTIVO
+14,Esteban,L�pez,1093456789,estebanlopez@gmail.com,3124044455,Cll 60 # 100-30,Encargado de Log�stica,Pedro Salazar,ACTIVO
+15,Juliana,Castro,1094567890,juliana.cast@gmail.com,3015055566,Cra 6 # 66-19,Oficinista o Auxiliar Administrativo,Laura Cepeda,INACTIVO
+
