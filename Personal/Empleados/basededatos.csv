@@ -14,4 +14,3 @@ id,nombre,apellido,cedula,email,telefono,direccion,cargo,jefe,inactivo
 13,Daniela,Moreno,1092345678,dani.moreno@empresa.com,3153033344,Cra 9 # 80-14,Ejecutivo de Ventas,H�ctor Su�rez,ACTIVO
 14,Esteban,L�pez,1093456789,estebanlopez@gmail.com,3124044455,Cll 60 # 100-30,Encargado de Log�stica,Pedro Salazar,ACTIVO
 15,Juliana,Castro,1094567890,juliana.cast@gmail.com,3015055566,Cra 6 # 66-19,Oficinista o Auxiliar Administrativo,Laura Cepeda,INACTIVO
-
