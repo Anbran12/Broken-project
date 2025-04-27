@@ -142,6 +142,24 @@ class MetodosEmpleados:
         self.ventanamostrarregistros.grab_set()
         self.ventanamostrarregistros.focus()
         self.ventanamostrarregistros.title("Tabla de registros")
-        self.ventanamostrarregistros.geometry("1000x600+300+100")
+        self.ventanamostrarregistros.geometry("1030x600+300+100")
+        cabecera = ctk.CTkFrame(self.ventanamostrarregistros)
+        cabecera.pack(pady=5, padx=5)
+        datos = ctk.CTkScrollableFrame(self.ventanamostrarregistros, width=1000, height=550)
+        datos.pack(pady=5, padx=5)
+        
+        with open("C:/Users/Anbran12/Documents/Python/Broken-project/Personal/Empleados/basededatos.csv", "r", newline="") as mostrarregistros:
+            lectordatos = csv.reader(mostrarregistros)
+            cabeceradatos = ["Id","Nombre","Apellido","Cédula","Email","Teléfono","Dirección","Cargo","Jefe", "Estado"]
+            for columna, dato in enumerate(cabeceradatos):
+                ctk.CTkLabel(cabecera,text=dato,width=100, wraplength=100).grid(row=0, column=columna)
+            next(lectordatos)
+            for j, registro in enumerate(lectordatos):
+                id,nombre,apellido,cedula,email,telefono,direccion,cargo,jefe,estado = registro
+                listadatos = [id,nombre,apellido,cedula,email,telefono,direccion,cargo,jefe,estado]
+                for i, dato in enumerate(listadatos):
+                    ctk.CTkLabel(datos, text=dato, width=100, wraplength=100).grid(row=j, column=i)
+
+            mostrarregistros.close()
         
         
