@@ -10,7 +10,7 @@ class Interfaz:
         
         ctk.CTkLabel(self.ventanainicio, text="Panel de opciones").pack(pady=10)
         ctk.CTkButton(self.ventanainicio, text="Registro", command=self.registro).pack(pady=10)
-        ctk.CTkButton(self.ventanainicio, text="Modificar").pack(pady=10)
+        ctk.CTkButton(self.ventanainicio, text="Modificar", command=self.modificarregistro).pack(pady=10)
         ctk.CTkButton(self.ventanainicio, text="Buscar por id").pack(pady=10)
         ctk.CTkButton(self.ventanainicio, text="Buscar por jefe").pack(pady=10)
         ctk.CTkButton(self.ventanainicio, text="Mostrar registros", command=self.mostrarregistros).pack(pady=10)
@@ -24,5 +24,9 @@ class Interfaz:
     def mostrarregistros(self):
         a = Mt.MetodosEmpleados()
         a.mostrarregistros()
+    def modificarregistro(self):
+        a = Mt.MetodosEmpleados()
+        a.modificarregistros()
+    
 
 prueba = Interfaz()
