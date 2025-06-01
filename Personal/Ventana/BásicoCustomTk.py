@@ -15,6 +15,7 @@ ingresousuario = ctk.CTkEntry(frame) # Cuandro de ingreso de datos (Entry)
 ingresousuario.pack()
 ingresousuario.get() # Captura de datos ingresados en el entry
 boton = ctk.CTkButton(ventana, text="presionar", command="Aqui se asigna una función al boton.").pack() # Boton
+ctk.CTkTabview(ventana) # Widget que permite tener pestañas (tabs), como en un navegador o configuraciones.
 ventana.focus() # Hace foco en la ventana emergente (la ventana principal sigue siendo visible)
 ventana.grab_set() # Desactiva la ventana principal mientras esta esté abierta (la ventana principal sigue siendo visible)
 ventana.withdraw() # Ocultar ventana para ser reemplazada por otra de manera temporal.
