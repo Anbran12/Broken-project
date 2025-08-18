@@ -18,12 +18,12 @@ class Formulario:
         self.menu.geometry("+300+200")
         self.menu.resizable(False,False)
 
-        imagen = ctk.CTkImage(light_image=Image.open("C:/Users/Anbran12/Documents/Python/Broken-project/Ventana/estadisticas.png"),
-                            dark_image=Image.open("C:/Users/Anbran12/Documents/Python/Broken-project/Ventana/estadisticas.png"),
-                            size=(200, 200))
+#        imagen = ctk.CTkImage(light_image=Image.open("C:\Users\Anbran12\OneDrive\FILES\Comandos y programas\Broken-project\Personal\Ventana\estadisticas.png"),
+#                            dark_image=Image.open("C:\Users\Anbran12\OneDrive\FILES\Comandos y programas\Broken-project\Personal\Ventana\estadisticas.png"),
+#                            size=(200, 200))
 
-        etiquetaimagen = ctk.CTkLabel(self.menu, image=imagen,text="")
-        etiquetaimagen.grid(row=0, column= 0, pady=20, padx=20)
+#        etiquetaimagen = ctk.CTkLabel(self.menu, image=imagen,text="")
+#        etiquetaimagen.grid(row=0, column= 0, pady=20, padx=20)
 
         marcobotones = ctk.CTkFrame(self.menu)
         marcobotones.grid(row= 0, column= 1, padx=20)
